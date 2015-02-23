@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>VKI Original code demo</title>
+	<script src="../vki/keyboard.js"></script>
+	<link href="../vki/keyboard.css" rel="stylesheet">
+	<script>
+		function addVKI() {
+			var myInput = document.getElementById('myInput');
+			if (!myInput.VKI_attached) VKI_attach(myInput);
+		}
+	</script>
+</head>
+<body ng-app="exampleApp">
+	<center ng-controller="ExampleCtrl">
+		<h1>VKI Original code demo</h1>
+		<div>
+			<label>keyboard binded with class: </label><br/>
+			<input type='text' class="keyboardInput"/>
+		</div>
+		<br><hr width="40%"><br>
+		<div>
+			<label>keyboard binded with custom script: </label><br/>
+			<button onclick="addVKI()">Add Keyboard</button>
+			<input id="myInput" type='text'/>
+		</div>
+	</center>
+</body>
+</html>

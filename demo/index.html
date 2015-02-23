@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Virtual Keyboard Demo</title>
+	<link href="../vki/keyboard.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+	<script src="../src/vki.js"></script>
+	<script src="../src/vki-service.js"></script>
+	<script>
+		angular.module('exampleApp', ['angular-virtual-keyboard'])
+		.controller('ExampleCtrl', ['$scope', function($scope){
+
+		}]);
+	</script>
+</head>
+<body ng-app="exampleApp">
+	<center ng-controller="ExampleCtrl">
+		<h1>Angular Virtual Keyboard</h1>
+		<div>
+			<label>keyboard binded with class: </label>
+			<input type='text' class="keyboardInput"/>
+		</div>
+		<br><hr width="40%"><br>
+		<div>
+			<label>keyboard binded with custom script: </label>
+			<input id="myInput" type='text' ng-virtual-keyboard/>
+		</div>
+	</center>
+</body>
+</html>
