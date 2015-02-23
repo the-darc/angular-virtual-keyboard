@@ -54,7 +54,7 @@
  *   - Dutch and US Int'l keyboard layouts by jerone
  *
  */
-var VKI_attach, VKI_close;
+
 var VKI = function() {
   var self = this;
 
@@ -1073,7 +1073,7 @@ var VKI = function() {
    * Attach the keyboard to an element
    *
    */
-  VKI_attach = function(elem) {
+  self.VKI_attach = function(elem) {
     if (elem.getAttribute("VKI_attached")) return false;
     if (self.VKI_imageURI) {
       var keybut = document.createElement('img');
@@ -1114,22 +1114,9 @@ var VKI = function() {
     }, false);
     if (self.VKI_isMoz)
       elem.addEventListener('blur', function() { this.setAttribute('_scrollTop', this.scrollTop); }, false);
-  };
-
-
-  /* ***** Find tagged input & textarea elements ***************** */
-  function VKI_buildKeyboardInputs() {
-    var inputElems = [
-      document.getElementsByTagName('input'),
-      document.getElementsByTagName('textarea')
-    ];
-    for (var x = 0, elem; elem = inputElems[x++];)
-      for (var y = 0, ex; ex = elem[y++];)
-        if (ex.nodeName == "TEXTAREA" || ex.type == "text" || ex.type == "password")
-				  if (ex.className.indexOf("keyboardInput") > -1) VKI_attach(ex);
 
     VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(); }, false);
-  }
+  };
 
 
   /* ****************************************************************
@@ -1171,7 +1158,8 @@ var VKI = function() {
 
   /* ***** Build the keyboard interface ************************** */
   this.VKI_keyboard = document.createElement('table');
-  this.VKI_keyboard.id = "keyboardInputMaster";
+  // this.VKI_keyboard.id = "keyboardInputMaster";
+  this.VKI_keyboard.className = "keyboardInputMaster";
   this.VKI_keyboard.dir = "ltr";
   this.VKI_keyboard.cellSpacing = "0";
   this.VKI_keyboard.reflow = function() {
@@ -1335,7 +1323,8 @@ var VKI = function() {
         tr.appendChild(td);
 
       var kbNumpad = document.createElement('td');
-          kbNumpad.id = "keyboardInputNumpad";
+          kbNumpad.className = "keyboardInputNumpad";
+      // kbNumpad.id = "keyboardInputNumpad";
         if (!this.VKI_numberPadOn) kbNumpad.style.display = "none";
         var ntable = document.createElement('table');
             ntable.cellSpacing = "0";
@@ -1715,7 +1704,7 @@ var VKI = function() {
    * Close the keyboard interface
    *
    */
-  this.VKI_close = VKI_close = function() {
+  this.VKI_close = function() {
     if (this.VKI_target) {
       try {
         this.VKI_keyboard.parentNode.removeChild(this.VKI_keyboard);
@@ -1787,10 +1776,28 @@ var VKI = function() {
   VKI_addListener(window, 'resize', this.VKI_position, false);
   VKI_addListener(window, 'scroll', this.VKI_position, false);
   this.VKI_kbsize();
-  VKI_addListener(window, 'load', VKI_buildKeyboardInputs, false);
+
   // VKI_addListener(window, 'load', function() {
   //   setTimeout(VKI_buildKeyboardInputs, 5);
   // }, false);
+
+  /* ***** Find tagged input & textarea elements ***************** */
+  // FIXME: REMOVE THE COMMENTED CODE ABOVE AND CREATE A DIRECTIVE WITH CONFIGURATION
+  //        "restrict: class" TO REPLACE THE REMOVED FEATURE.
+  // function VKI_buildKeyboardInputs() {
+  //   var inputElems = [
+  //     document.getElementsByTagName('input'),
+  //     document.getElementsByTagName('textarea')
+  //   ];
+  //   for (var x = 0, elem; elem = inputElems[x++];)
+  //     for (var y = 0, ex; ex = elem[y++];)
+  //       if (ex.nodeName == "TEXTAREA" || ex.type == "text" || ex.type == "password")
+    //      if (ex.className.indexOf("keyboardInput") > -1) self.VKI_attach(ex);
+
+  //   VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(); }, false);
+  // }
+  // VKI_addListener(window, 'load', VKI_buildKeyboardInputs, false);
+
 
   return self;
 };
