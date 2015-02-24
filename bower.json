@@ -1,0 +1,26 @@
+{
+  "name": "angular-virtual-keyboard",
+  "version": "0.1.0",
+  "authors": [
+    "darc <darc.tec@gmail.com>"
+  ],
+  "description": "A Virtual Keyboard Interface in AngularJs",
+  "main": "release/angular-virtual-keyboard.min.js",
+  "keywords": [
+    "Keyboard",
+    "Virtual",
+    "VKI"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ua-parser-js": "~0.7.3",
+    "angular": "~1.3.13"
+  }
+}

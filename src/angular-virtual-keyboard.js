@@ -14,10 +14,19 @@ angular.module('angular-virtual-keyboard', [])
 		scope: {
 			config: '=ngVirtualKeyboard'
 		},
-		link: function(scope, elements,attrs,ngModelCtrl) {
+		link: function(scope, elements, attrs, ngModelCtrl) {
 			if(!ngModelCtrl){
 				return;
 			}
+
+			// Don't show virtual keyboard in mobile devices (default)
+			var parser = new UAParser();
+			var device = parser.getDevice();
+			var isMobile = device.type === 'mobile' || device.type === 'tablet';
+			if (isMobile && attrs.vkForceMobile === undefined) {
+				return;
+			}
+
 			ngVirtualKeyboardService.attach(elements[0], scope.config, function() {
 				$timeout(function() {
 					ngModelCtrl.$setViewValue(elements[0].value);
