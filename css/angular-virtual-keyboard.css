@@ -1,6 +1,6 @@
 table.keyboardInputMaster {
   position:absolute;
-  font:normal 11px Arial,sans-serif;
+  font:normal 16px Arial,sans-serif;
   border-top:1px solid #eeeeee;
   border-right:1px solid #888888;
   border-bottom:1px solid #444444;
@@ -30,7 +30,7 @@ table.keyboardInputMaster * {
   position:static;
   color:#000000;
   background:transparent;
-  font:normal 11px Arial,sans-serif;
+  font:normal 16px Arial,sans-serif;
   width:auto;
   height:auto;
   min-width:0;
@@ -47,19 +47,19 @@ table.keyboardInputMaster table {
 }
 table.keyboardInputMaster.keyboardInputSize1,
 table.keyboardInputMaster.keyboardInputSize1 * {
-  font-size:9px;
+  font-size:13px;
 }
 table.keyboardInputMaster.keyboardInputSize3,
 table.keyboardInputMaster.keyboardInputSize3 * {
-  font-size:13px;
+  font-size:20px;
 }
 table.keyboardInputMaster.keyboardInputSize4,
 table.keyboardInputMaster.keyboardInputSize4 * {
-  font-size:16px;
+  font-size:24px;
 }
 table.keyboardInputMaster.keyboardInputSize5,
 table.keyboardInputMaster.keyboardInputSize5 * {
-  font-size:20px;
+  font-size:28px;
 }
 
 table.keyboardInputMaster thead tr th {

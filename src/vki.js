@@ -3,20 +3,14 @@
  * HTML Virtual Keyboard Interface Script - v1.49
  *   Copyright (c) 2011 - GreyWyvern
  *
- *  - Licenced for free distribution under the BSDL
- *          http://www.opensource.org/licenses/bsd-license.php
- *
  * Add a script-driven keyboard interface to text fields, password
  * fields and textareas.
  *
- * See http://www.greywyvern.com/code/javascript/keyboard for examples
- * and usage instructions.
+ * NOTE: The code below has been slightly modified to accommodate the needs of the
+ *       angular-virtual-keyboard directive created in this project.
  *
- * Version 1.49 - November 8, 2011
- *   - Don't display language drop-down if only one keyboard available
- *
- *   See full changelog at:
- *     http://www.greywyvern.com/code/javascript/keyboard.changelog.txt
+ *       See http://www.greywyvern.com/code/javascript/keyboard for examples,
+ *       usage instructions and the original 'Virtual Keyboard Interface' Code.
  *
  * Keyboard Credits
  *   - Yiddish (Yidish Lebt) keyboard layout by Simche Taub (jidysz.net)
@@ -72,7 +66,7 @@ var VKI = function(customConfig, keyInputCallback) {
   this.VKI_numberPadOn = false;  // Show number pad by default
   this.VKI_kts = this.VKI_kt = config.VKI_kt || "Portugu\u00eas Brasileiro";  // Default keyboard layout
   this.VKI_langAdapt = !config.VKI_kt;  // Use lang attribute of input to select keyboard (Will be used if no keyboard layout was defined in custom config)
-  this.VKI_size = 2;  // Default keyboard size (1-5)
+  this.VKI_size = config.VKI_size >=1 && config.VKI_size <= 5 ? config.VKI_size : 3;  // Default keyboard size (1-5)
   this.VKI_sizeAdj = true;  // Allow user to adjust keyboard size
   this.VKI_clearPasswords = false;  // Clear password fields on focus
   this.VKI_imageURI = config.VKI_imageURI !== undefined ? config.VKI_imageURI : "";  // If empty string, use imageless mode
