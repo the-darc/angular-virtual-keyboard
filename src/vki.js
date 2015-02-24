@@ -55,25 +55,26 @@
  *
  */
 
-var VKI = function() {
+var VKI = function(customConfig) {
   var self = this;
+  var config = customConfig || {};
 
   this.VKI_version = "1.49";
-  this.VKI_showVersion = true;
+  this.VKI_showVersion = config.VKI_showVersion !== undefined ? config.VKI_showVersion : false;
   this.VKI_target = false;
   this.VKI_shift = this.VKI_shiftlock = false;
   this.VKI_altgr = this.VKI_altgrlock = false;
   this.VKI_dead = false;
   this.VKI_deadBox = true; // Show the dead keys checkbox
-  this.VKI_deadkeysOn = false;  // Turn dead keys on by default
-  this.VKI_numberPad = true;  // Allow user to open and close the number pad
+  this.VKI_deadkeysOn = config.VKI_deadkeysOn !== undefined ? config.VKI_deadkeysOn : true;  // Turn dead keys on by default
+  this.VKI_numberPad = config.VKI_numberPad !== undefined ? config.VKI_numberPad : false;  // Allow user to open and close the number pad
   this.VKI_numberPadOn = false;  // Show number pad by default
-  this.VKI_kts = this.VKI_kt = "US International";  // Default keyboard layout
-  this.VKI_langAdapt = true;  // Use lang attribute of input to select keyboard
+  this.VKI_kts = this.VKI_kt = config.VKI_kt || "Portugu\u00eas Brasileiro";  // Default keyboard layout
+  this.VKI_langAdapt = !config.VKI_kt;  // Use lang attribute of input to select keyboard (Will be used if no keyboard layout was defined in custom config)
   this.VKI_size = 2;  // Default keyboard size (1-5)
   this.VKI_sizeAdj = true;  // Allow user to adjust keyboard size
   this.VKI_clearPasswords = false;  // Clear password fields on focus
-  this.VKI_imageURI = "keyboard.png";  // If empty string, use imageless mode
+  this.VKI_imageURI = config.VKI_imageURI !== undefined ? config.VKI_imageURI : "";  // If empty string, use imageless mode
   this.VKI_clickless = 0;  // 0 = disabled, > 0 = delay in ms
   this.VKI_activeTab = 0;  // Tab moves to next: 1 = element, 2 = keyboard enabled element
   this.VKI_enterSubmit = true;  // Submit forms when Enter is pressed
@@ -85,6 +86,8 @@ var VKI = function() {
   this.VKI_isWebKit = RegExp("KHTML").test(navigator.userAgent);
   this.VKI_isOpera = RegExp("Opera").test(navigator.userAgent);
   this.VKI_isMoz = (!this.VKI_isWebKit && navigator.product == "Gecko");
+
+  this.VKI_showKbSelect = config.VKI_showKbSelect || false; // Defaults to hide keyboard selection combobox
 
   /* ***** i18n text strings ************************************* */
   this.VKI_i18n = {
@@ -1182,53 +1185,55 @@ var VKI = function() {
       var th = document.createElement('th');
           th.colSpan = "2";
 
-        var kbSelect = document.createElement('div');
-            kbSelect.title = this.VKI_i18n['02'];
-          VKI_addListener(kbSelect, 'click', function() {
-            var ol = this.getElementsByTagName('ol')[0];
-            if (!ol.style.display) {
-                ol.style.display = "block";
-              var li = ol.getElementsByTagName('li');
-              for (var x = 0, scr = 0; x < li.length; x++) {
-                if (VKI_kt == li[x].firstChild.nodeValue) {
-                  li[x].className = "selected";
-                  scr = li[x].offsetTop - li[x].offsetHeight * 2;
-                } else li[x].className = "";
-              } setTimeout(function() { ol.scrollTop = scr; }, 0);
-            } else ol.style.display = "";
-          }, false);
-            kbSelect.appendChild(document.createTextNode(this.VKI_kt));
-            kbSelect.appendChild(document.createTextNode(this.VKI_isIElt8 ? " \u2193" : " \u25be"));
-            kbSelect.langCount = 0;
-          var ol = document.createElement('ol');
-            for (ktype in this.VKI_layout) {
-              if (typeof this.VKI_layout[ktype] == "object") {
-                if (!this.VKI_layout[ktype].lang) this.VKI_layout[ktype].lang = [];
-                for (var x = 0; x < this.VKI_layout[ktype].lang.length; x++)
-                  this.VKI_langCode[this.VKI_layout[ktype].lang[x].toLowerCase().replace(/-/g, "_")] = ktype;
-                var li = document.createElement('li');
-                    li.title = this.VKI_layout[ktype].name;
-                  VKI_addListener(li, 'click', function(e) {
-                    e = e || event;
-                    if (e.stopPropagation) { e.stopPropagation(); } else e.cancelBubble = true;
-                    this.parentNode.style.display = "";
-                    self.VKI_kts = self.VKI_kt = kbSelect.firstChild.nodeValue = this.firstChild.nodeValue;
-                    self.VKI_buildKeys();
-                    self.VKI_position(true);
-                  }, false);
-                  VKI_mouseEvents(li);
-                    li.appendChild(document.createTextNode(ktype));
-                  ol.appendChild(li);
-                kbSelect.langCount++;
-              }
-            } kbSelect.appendChild(ol);
-          if (kbSelect.langCount > 1) th.appendChild(kbSelect);
-        this.VKI_langCode.index = [];
-        for (prop in this.VKI_langCode)
-          if (prop != "index" && typeof this.VKI_langCode[prop] == "string")
-            this.VKI_langCode.index.push(prop);
-        this.VKI_langCode.index.sort();
-        this.VKI_langCode.index.reverse();
+        if (self.VKI_showKbSelect) {
+          var kbSelect = document.createElement('div');
+              kbSelect.title = this.VKI_i18n['02'];
+            VKI_addListener(kbSelect, 'click', function() {
+              var ol = this.getElementsByTagName('ol')[0];
+              if (!ol.style.display) {
+                  ol.style.display = "block";
+                var li = ol.getElementsByTagName('li');
+                for (var x = 0, scr = 0; x < li.length; x++) {
+                  if (VKI_kt == li[x].firstChild.nodeValue) {
+                    li[x].className = "selected";
+                    scr = li[x].offsetTop - li[x].offsetHeight * 2;
+                  } else li[x].className = "";
+                } setTimeout(function() { ol.scrollTop = scr; }, 0);
+              } else ol.style.display = "";
+            }, false);
+              kbSelect.appendChild(document.createTextNode(this.VKI_kt));
+              kbSelect.appendChild(document.createTextNode(this.VKI_isIElt8 ? " \u2193" : " \u25be"));
+              kbSelect.langCount = 0;
+            var ol = document.createElement('ol');
+              for (ktype in this.VKI_layout) {
+                if (typeof this.VKI_layout[ktype] == "object") {
+                  if (!this.VKI_layout[ktype].lang) this.VKI_layout[ktype].lang = [];
+                  for (var x = 0; x < this.VKI_layout[ktype].lang.length; x++)
+                    this.VKI_langCode[this.VKI_layout[ktype].lang[x].toLowerCase().replace(/-/g, "_")] = ktype;
+                  var li = document.createElement('li');
+                      li.title = this.VKI_layout[ktype].name;
+                    VKI_addListener(li, 'click', function(e) {
+                      e = e || event;
+                      if (e.stopPropagation) { e.stopPropagation(); } else e.cancelBubble = true;
+                      this.parentNode.style.display = "";
+                      self.VKI_kts = self.VKI_kt = kbSelect.firstChild.nodeValue = this.firstChild.nodeValue;
+                      self.VKI_buildKeys();
+                      self.VKI_position(true);
+                    }, false);
+                    VKI_mouseEvents(li);
+                      li.appendChild(document.createTextNode(ktype));
+                    ol.appendChild(li);
+                  kbSelect.langCount++;
+                }
+              } kbSelect.appendChild(ol);
+            if (kbSelect.langCount > 1) th.appendChild(kbSelect);
+          this.VKI_langCode.index = [];
+          for (prop in this.VKI_langCode)
+            if (prop != "index" && typeof this.VKI_langCode[prop] == "string")
+              this.VKI_langCode.index.push(prop);
+          this.VKI_langCode.index.sort();
+          this.VKI_langCode.index.reverse();
+        }
 
         if (this.VKI_numberPad) {
           var span = document.createElement('span');
@@ -1619,7 +1624,7 @@ var VKI = function() {
       if (this.VKI_langAdapt && this.VKI_target.lang) {
         var chg = false, sub = [], lang = this.VKI_target.lang.toLowerCase().replace(/-/g, "_");
         for (var x = 0, chg = false; !chg && x < this.VKI_langCode.index.length; x++)
-          if (lang.indexOf(this.VKI_langCode.index[x]) == 0)
+          if (lang.indexOf(this.VKI_langCode.index[x]) == 0 && self.VKI_showKbSelect)
             chg = kbSelect.firstChild.nodeValue = this.VKI_kt = this.VKI_langCode[this.VKI_langCode.index[x]];
         if (chg) this.VKI_buildKeys();
       }
@@ -1710,10 +1715,12 @@ var VKI = function() {
         this.VKI_keyboard.parentNode.removeChild(this.VKI_keyboard);
         if (this.VKI_isIE6) this.VKI_iframe.parentNode.removeChild(this.VKI_iframe);
       } catch (e) {}
-      if (this.VKI_kt != this.VKI_kts) {
-        kbSelect.firstChild.nodeValue = this.VKI_kt = this.VKI_kts;
-        this.VKI_buildKeys();
-      } kbSelect.getElementsByTagName('ol')[0].style.display = "";;
+      if (this.VKI_showKbSelect) {
+        if (this.VKI_kt != this.VKI_kts) {
+          kbSelect.firstChild.nodeValue = this.VKI_kt = this.VKI_kts;
+          this.VKI_buildKeys();
+        } kbSelect.getElementsByTagName('ol')[0].style.display = "";;
+      }
       this.VKI_target.focus();
       if (this.VKI_isIE) {
         setTimeout(function() { self.VKI_target = false; }, 0);
