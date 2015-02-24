@@ -55,9 +55,10 @@
  *
  */
 
-var VKI = function(customConfig) {
+var VKI = function(customConfig, keyInputCallback) {
   var self = this;
   var config = customConfig || {};
+  self.keyInputCallback = keyInputCallback || function(){};
 
   this.VKI_version = "1.49";
   this.VKI_showVersion = config.VKI_showVersion !== undefined ? config.VKI_showVersion : false;
@@ -1609,6 +1610,7 @@ var VKI = function(customConfig) {
       if (this.VKI_shift) this.VKI_modify("Shift");
       if (this.VKI_altgr) this.VKI_modify("AltGr");
       this.VKI_target.focus();
+      this.keyInputCallback();
     } else if (this.VKI_target.createTextRange && this.VKI_target.range)
       this.VKI_target.range.select();
   };
