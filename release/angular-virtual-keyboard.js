@@ -1018,7 +1018,7 @@ angular.module('angular-virtual-keyboard', [])
 				var parser = new UAParser();
 				var device = parser.getDevice();
 				var isMobile = device.type === 'mobile' || device.type === 'tablet';
-				if (isMobile && attrs.vkForceMobile === undefined) {
+				if (isMobile && config.VKI_showInMobile !== true) {
 					return;
 				}
 			}

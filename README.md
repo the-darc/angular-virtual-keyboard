@@ -1,9 +1,9 @@
 [![Bower version](https://badge.fury.io/bo/angular-virtual-keyboard.svg)](http://badge.fury.io/bo/angular-virtual-keyboard)
 angular-virtual-keyboard
 ========================
-An AngularJs Virtual Keyboard Interface based on [GreyWyvern VKI](http://www.greywyvern.com/code/javascript/keyboard).
+An AngularJs Virtual Keyboard Interface based on [GreyWyvern VKI](http://www.greywyvern.com/code/javascript/keyboard). See example in the [Demo page](http://the-darc.github.io/angular-virtual-keyboard).
 
-![Demo image](https://github.com/the-darc/angular-virtual-keyboard/blob/master/demo/demo.png)
+![Demo image](http://the-darc.github.io/angular-virtual-keyboard/images/demo.png)
 
 ## Bower install
 
@@ -71,7 +71,7 @@ The ``ng-virtual-keyboard`` could receive an array with the configurations that 
 
 ### Example of use
 
-_See example in [demo code](https://github.com/the-darc/angular-virtual-keyboard/blob/master/demo/index.html)_
+_See example in the [Demo page](http://the-darc.github.io/angular-virtual-keyboard) or the [demo code](https://github.com/the-darc/angular-virtual-keyboard/blob/master/demo/index.html)_
 
 ## License
 
