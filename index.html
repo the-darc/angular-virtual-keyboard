@@ -8,16 +8,68 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="javascripts/scale.fix.js"></script>
+
+    <!-- angular-virtual-keyboard dependencies -->
+    <!-- Required -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    <script src="javascripts/angular-virtual-keyboard.min.js"></script>
+    <link href="stylesheets/angular-virtual-keyboard.css" rel="stylesheet">
+    <!-- Optional -->
+    <script src="javascripts/angular-useragent-parser.min.js"></script>
+    <!-- - - - - - - - - - - - - - - - - - - - -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <!-- angular-virtual-keyboard configuration -->
+    <script>
+      angular.module('exampleApp', ['angular-useragent-parser', 'angular-virtual-keyboard'])
+      .config(['VKI_Config', function(VKI_Config) {
+        VKI_Config.VKI_layout['Portugu\u00eas Brasileiro'] = {
+          'name': "Portuguese (Brazil)", 'keys': [
+          [["'", '"'], ["1", "!", "\u00b9"], ["2", "@", "\u00b2"], ["3", "#", "\u00b3"], ["4", "$", "\u00a3"], ["5", "%", "\u00a2"], ["6", "\u00a8", "\u00ac"], ["7", "&"], ["8", "*"], ["9", "("], ["0", ")"], ["-", "_"], ["=", "+", "\u00a7"], ["Bksp", "Bksp"]],
+          [["Tab", "Tab"], ["q", "Q", "/"], ["w", "W", "?"], ["e", "E", "\u20ac"], ["r", "R"], ["t", "T"], ["y", "Y"], ["u", "U"], ["i", "I"], ["o", "O"], ["p", "P"], ["\u00b4", "`"], ["[", "{", "\u00aa"], ["Enter", "Enter"]],
+          [["Caps", "Caps"], ["a", "A"], ["s", "S"], ["d", "D"], ["f", "F"], ["g", "G"], ["h", "H"], ["j", "J"], ["k", "K"], ["l", "L"], ["\u00e7", "\u00c7"], ["~", "^"], ["]", "}", "\u00ba"], ["/", "?"]],
+          [["Shift", "Shift"], ["\\", "|"], ["z", "Z"], ["x", "X"], ["c", "C", "\u20a2"], ["v", "V"], ["b", "B"], ["n", "N"], ["m", "M"], [",", "<"], [".", ">"], [":", ":"], ["Shift", "Shift"]],
+          [[" ", " ", " ", " "], ["AltGr", "AltGr"]]
+        ], 'lang': ["pt-BR"] };
+
+        VKI_Config.VKI_layout['Numerico'] = {
+          'name': "Numerico", 'keys': [
+          [["1", '1'], ["2", "2"], ["3", "3"], ["Bksp", "Bksp"]],
+          [["4", "4"], ["5", "5"], ["6", '6'], ["Enter", "Enter"]],
+          [["7", "7"], ["8", "8"], ["9", "9"], []],
+          [["0", "0"], ["-"], ["+"], [","]]
+        ], 'lang': ["pt-BR-num"] };
+
+        VKI_Config.VKI_kt = 'Portugu\u00eas Brasileiro';
+
+        /* CHANGE TEXT LANGUAGE */
+        VKI_Config.VKI_i18n = {
+         '00': "Exibir teclado numérico",
+         '01': "Exibir teclado virtual",
+         '02': "Selecionar layout do teclado",
+         '03': "Teclas mortas",
+         '04': "Ligado",
+         '05': "Desligado",
+         '06': "Fechar teclado",
+         '07': "Limpar",
+         '08': "Limpar campo",
+         '09': "Versão",
+         '10': "Diminuir tamanho do teclado",
+         '11': "Aumentar tamanho do teclado"
+        };
+      }]);
+    </script>
+    <!-- - - - - - - - - - - - - - - - - - - - -->
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <h1 class="header">Angular-virtual-keyboard</h1>
-        <p class="header">An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI</p>
+        <h1 class="header">angular-virtual-keyboard</h1>
+        <p class="header">An AngularJs Virtual Keyboard Interface based on <a href="http://www.greywyvern.com/code/javascript/keyboard">GreyWyvern VKI</a></p>
 
         <ul>
           <li class="download"><a class="buttons" href="https://github.com/the-darc/angular-virtual-keyboard/zipball/master">Download ZIP</a></li>
@@ -26,18 +78,14 @@
         </ul>
 
         <p class="header">This project is maintained by <a class="header name" href="https://github.com/the-darc">the-darc</a></p>
-
-
       </header>
-      <section>
-        <p><a href="http://badge.fury.io/bo/angular-virtual-keyboard"><img src="https://badge.fury.io/bo/angular-virtual-keyboard.svg" alt="Bower version"></a></p>
+
+<section>
 
 <h1>
 <a id="angular-virtual-keyboard" class="anchor" href="#angular-virtual-keyboard" aria-hidden="true"><span class="octicon octicon-link"></span></a>angular-virtual-keyboard</h1>
 
 <p>An AngularJs Virtual Keyboard Interface based on <a href="http://www.greywyvern.com/code/javascript/keyboard">GreyWyvern VKI</a>.</p>
-
-<p><img src="https://github.com/the-darc/angular-virtual-keyboard/blob/master/demo/demo.png" alt="Demo image"></p>
 
 <h2>
 <a id="bower-install" class="anchor" href="#bower-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower install</h2>
@@ -54,86 +102,32 @@
 </ul>
 
 <h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+<div ng-app="exampleApp">
+  <h3>Simple usage</h3>
+  <div>
+    <label>Input text: </label><input type='text' ng-model="t01" ng-virtual-keyboard/><br>
+    <em>(Model value: {{t01}})</em>
+  </div>
 
-<ol>
-<li><p>Import the <code>angular-virtual-keyboard.min.js</code> script in your page.</p></li>
-<li><p>Include the module <code>angular-virtual-keyboard</code> in your angular app.</p></li>
-<li><p>Include the module <code>angular-useragent-parser</code> in your angular app. <em>Optional, used to auto hide the virtual keyboard interface in mobile devices.</em></p></li>
-<li><p>Use the 'ng-virtual-keyboard' directive in any text fields, password fields or textareas:</p></li>
-</ol>
+  <h3>Keyboard layout: US International</h3>
+  <div>
+    <label>Input text: </label><input type='text' ng-model="t02" ng-virtual-keyboard="{VKI_kt: 'US International', VKI_numberPad: true, VKI_showVersion: true}"/><br>
+    <em>(Model value: {{t02}})</em>
+  </div>
 
-<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span> <span class="pl-e">ng-model</span>=<span class="pl-s1"><span class="pl-pds">"</span>yourModel<span class="pl-pds">"</span></span> <span class="pl-e">ng-virtual-keyboard</span>/&gt;</pre></div>
+  <h3>Numeric customized keyboard layout</h3>
+  <div>
+    <label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{VKI_kt: 'Numerico'}"/><br>
+    <em>(Model value: {{t03}})</em>
+  </div>
 
-<h2>
-<a id="supported-configurations" class="anchor" href="#supported-configurations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported Configurations</h2>
-
-<h3>
-<a id="directive-global-configurations" class="anchor" href="#directive-global-configurations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directive global configurations</h3>
-
-<p>The angular-virtual-keyboard module use an <a href="https://docs.angularjs.org/api/auto/service/%24provide#constant">Angular.js Constant</a> named <code>VKI_Config</code> to handle the configurations that will be applied to all instances of the <code>ng-virtual-keyboard</code> directive. See list below:</p>
-
-<ul>
-<li>
-<strong>Keyboard layouts configurations</strong> <code>VKI_Config.VKI_layout</code>: Array of Keyboard Layout configurations. See <a href="https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-layouts.js">vki-layouts.js</a> for keyboard layout configuration examples. </li>
-<li>
-<strong>Deadkeys configurations</strong> <code>VKI_Config.VKI_deadkey</code> Array of Deadkeys configurations. See <a href="https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-deadkeys.js">vki-deadkeys.js</a> for deadkeys configuration examples. </li>
-<li>
-<strong>Default keyboard layout</strong> <code>VKI_Config.VKI_kt</code> Name of the layout configuration to be used as default (if no specific layout configuration is provided in the directive instance configuration). <em>Default: 'US International'</em>
-</li>
-<li>
-<strong>i18n onfiguration</strong> <code>VKI_Config.VKI_i18n</code>: An array to replace the default labels of the keyboard interface. See example below:<br>
-</li>
-</ul>
-
-<div class="highlight highlight-javascript"><pre>VKI_Config.VKI_i18n <span class="pl-k">=</span> {
-    <span class="pl-s1"><span class="pl-pds">'</span>00<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Exibir teclado numérico<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>01<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Exibir teclado virtual<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>02<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Selecionar layout do teclado<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>03<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Teclas mortas<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>04<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ligado<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>05<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Desligado<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>06<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Fechar teclado<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>07<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Limpar<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>08<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Limpar campo<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>09<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Versão<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>10<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Diminuir tamanho do teclado<span class="pl-pds">"</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>11<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Aumentar tamanho do teclado<span class="pl-pds">"</span></span>
-};</pre></div>
-
-<h3>
-<a id="directive-instance-configurations" class="anchor" href="#directive-instance-configurations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directive instance configurations</h3>
-
-<p>The <code>ng-virtual-keyboard</code> could receive an array with the configurations that will be applied to the keyboard interface instance of the input field. See list below:</p>
-
-<ul>
-<li>
-<strong>Default keyboard layout</strong> <code>VKI_kt</code> Change the default keyboard which displays first for each directive instance. <em>Default: Defined in global configuration</em>
-</li>
-<li>
-<strong>Dead keys</strong> <code>VKI_deadkeysOn</code> To turn dead keys on or off by default. <em>Default: true</em>
-</li>
-<li>
-<strong>Number pad</strong> <code>VKI_numberPad</code> To enable de number pad button. <em>Default: false</em>
-</li>
-<li>
-<strong>VKI Version</strong> <code>VKI_showVersion</code> To show the VKI-core based version. <em>Default: false</em>
-</li>
-<li>
-<strong>Imageless mode</strong> <code>VKI_imageURI</code> By default the keyboard will be show on input field focus. Pass a image URI to add a clickable image next to inputs and replace the on focus default behavior. <em>Default: false</em>
-</li>
-<li>
-<strong>Keyboard size control</strong> <code>VKI_size</code> Five sizes based on font-size have been pre-programmed: 13px, 16px (default), 20px, 24px and 28px; corresponding to the sizes 1 to 5 respectively. <em>Default: 3</em>
-</li>
-<li>
-<strong>Show in mobile</strong> <code>VKI_showInMobile</code> True to display the interface on mobiles devices. <em>Default: false</em>
-</li>
-</ul>
-
-<h3>
-<a id="example-of-use" class="anchor" href="#example-of-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example of use</h3>
-
-<p><em>See example in <a href="https://github.com/the-darc/angular-virtual-keyboard/blob/master/demo/index.html">demo code</a></em></p>
+  <h3>Default size changed and button action</h3>
+  <div>
+    <label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{VKI_size: 5, VKI_imageURI: 'images/keyboard.png'}"/><br>
+    <em>(Model value: {{t03}})</em>
+  </div>
+<div>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
@@ -165,6 +159,6 @@ SOFTWARE.</p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
   </body>
 </html>
