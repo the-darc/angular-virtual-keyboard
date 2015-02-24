@@ -1,5 +1,6 @@
 angular.module('angular-virtual-keyboard', [])
 .constant('VKI_Config', {
+	/*jshint ignore:start */
 	// VKI_layout
 	'VKI_layout': {
 		'US International': {
@@ -46,21 +47,23 @@ angular.module('angular-virtual-keyboard', [])
 	// DEFAULT VKI_layout
 	VKI_kt: 'US International',
 	VKI_i18n: {
-		'00': "Display Number Pad",
-		'01': "Display virtual keyboard interface",
-		'02': "Select keyboard layout",
-		'03': "Dead keys",
-		'04': "On",
-		'05': "Off",
-		'06': "Close the keyboard",
-		'07': "Clear",
-		'08': "Clear this input",
-		'09': "Version",
-		'10': "Decrease keyboard size",
-		'11': "Increase keyboard size"
+		'00': 'Display Number Pad',
+		'01': 'Display virtual keyboard interface',
+		'02': 'Select keyboard layout',
+		'03': 'Dead keys',
+		'04': 'On',
+		'05': 'Off',
+		'06': 'Close the keyboard',
+		'07': 'Clear',
+		'08': 'Clear this input',
+		'09': 'Version',
+		'10': 'Decrease keyboard size',
+		'11': 'Increase keyboard size'
 	}
+	/*jshint ignore:end */
 })
 .service('ngVirtualKeyboardService', ['VKI_Config', function(VKI_Config) {
+	/*globals VKI */
 	return {
 		attach: function(element, config, inputCallback) {
 			config = config || {};
@@ -102,5 +105,5 @@ angular.module('angular-virtual-keyboard', [])
 				});
 			});
 		}
-	}
+	};
 }]);

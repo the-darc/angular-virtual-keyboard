@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "homepage": "https://github.com/the-darc/angular-virtual-keyboard",
   "authors": [
-    "darc <darc.tec@gmail.com>"
+    "the-darc <darc.tec@gmail.com>"
   ],
   "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
   "main": "release/angular-virtual-keyboard.min.js",
@@ -17,8 +17,10 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "vki",
+    "src",
+    "demo",
+    "css"
   ],
   "dependencies": {
     "angular-useragent-parser": "~0.1.0"

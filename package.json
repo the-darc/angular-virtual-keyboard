@@ -1,0 +1,29 @@
+{
+  "name": "angular-virtual-keyboard",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/the-darc/angular-virtual-keyboard.git"
+  },
+  "author": "the-darc <darc.tec@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/the-darc/angular-virtual-keyboard/issues"
+  },
+  "homepage": "https://github.com/the-darc/angular-virtual-keyboard",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-footer": "^1.0.5",
+    "gulp-header": "^1.2.2",
+    "gulp-jshint": "^1.9.2",
+    "gulp-load-plugins": "^0.8.0",
+    "gulp-uglify": "^1.1.0",
+    "jshint-stylish": "^1.0.0"
+  }
+}
