@@ -5,13 +5,32 @@
 	<title>Angular Virtual Keyboard Demo</title>
 	<link href="../css/angular-virtual-keyboard.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
-	<script src="../src/vki.js"></script>
+	<script src="../src/vki-core.js"></script>
 	<script src="../src/angular-virtual-keyboard.js"></script>
 	<script src="../bower_components/ua-parser-js/dist/ua-parser.min.js"></script>
 	<script>
 		angular.module('exampleApp', ['angular-virtual-keyboard'])
-		.controller('ExampleCtrl', ['$scope', function($scope){
+		.config(['VKI_Config', function(VKI_Config) {
+			VKI_Config.VKI_layout['Portugu\u00eas Brasileiro'] = {
+				'name': "Portuguese (Brazil)", 'keys': [
+				[["'", '"'], ["1", "!", "\u00b9"], ["2", "@", "\u00b2"], ["3", "#", "\u00b3"], ["4", "$", "\u00a3"], ["5", "%", "\u00a2"], ["6", "\u00a8", "\u00ac"], ["7", "&"], ["8", "*"], ["9", "("], ["0", ")"], ["-", "_"], ["=", "+", "\u00a7"], ["Bksp", "Bksp"]],
+				[["Tab", "Tab"], ["q", "Q", "/"], ["w", "W", "?"], ["e", "E", "\u20ac"], ["r", "R"], ["t", "T"], ["y", "Y"], ["u", "U"], ["i", "I"], ["o", "O"], ["p", "P"], ["\u00b4", "`"], ["[", "{", "\u00aa"], ["Enter", "Enter"]],
+				[["Caps", "Caps"], ["a", "A"], ["s", "S"], ["d", "D"], ["f", "F"], ["g", "G"], ["h", "H"], ["j", "J"], ["k", "K"], ["l", "L"], ["\u00e7", "\u00c7"], ["~", "^"], ["]", "}", "\u00ba"], ["/", "?"]],
+				[["Shift", "Shift"], ["\\", "|"], ["z", "Z"], ["x", "X"], ["c", "C", "\u20a2"], ["v", "V"], ["b", "B"], ["n", "N"], ["m", "M"], [",", "<"], [".", ">"], [":", ":"], ["Shift", "Shift"]],
+				[[" ", " ", " ", " "], ["AltGr", "AltGr"]]
+			], 'lang': ["pt-BR"] };
 
+			VKI_Config.VKI_layout['Numerico'] = {
+				'name': "Numerico", 'keys': [
+				[["1", '1'], ["2", "2"], ["3", "3"], ["Bksp", "Bksp"]],
+				[["4", "4"], ["5", "5"], ["6", '6'], ["Enter", "Enter"]],
+				[["7", "7"], ["8", "8"], ["9", "9"], []],
+				[["0", "0"], ["-"], ["+"], [","]]
+			], 'lang': ["pt-BR-num"] };
+
+		}])
+		.controller('ExampleCtrl', ['$scope', function($scope){
+			// Your controller code comes here
 		}]);
 	</script>
 </head>
@@ -39,9 +58,9 @@
 		<br><br><hr width="80%">
 		<h2>Custom configurations</h2>
 
-		<h4>Keyboard layout: US International</h4>
+		<h4>Keyboard layout: Português Brasileiro</h4>
 		<div>
-			<label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{VKI_kt: 'US International'}"/><br>
+			<label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{VKI_kt: 'Portugu\u00eas Brasileiro'}"/><br>
 			<em>(Model value: {{t03}})</em>
 		</div>
 
@@ -85,6 +104,12 @@
 		<div>
 			<label>Input text: </label><input type='text' ng-model="t010" ng-virtual-keyboard vk-force-mobile/><br>
 			<em>(Model value: {{t010}})</em>
+		</div>
+
+ 		<h4>Use keyboard button action</h4>
+		<div>
+			<label>Input Number: </label><input type='text' ng-model="t011" ng-virtual-keyboard="{VKI_kt: 'Numerico'}"/><br>
+			<em>(Model value: {{t011}})</em>
 		</div>
 	</center>
 </body>
