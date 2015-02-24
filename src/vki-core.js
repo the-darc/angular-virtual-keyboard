@@ -85,20 +85,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_showKbSelect = config.VKI_showKbSelect || false; // Defaults to hide keyboard selection combobox
 
   /* ***** i18n text strings ************************************* */
-  this.VKI_i18n = {
-    '00': "Display Number Pad",
-    '01': "Display virtual keyboard interface",
-    '02': "Select keyboard layout",
-    '03': "Dead keys",
-    '04': "On",
-    '05': "Off",
-    '06': "Close the keyboard",
-    '07': "Clear",
-    '08': "Clear this input",
-    '09': "Version",
-    '10': "Decrease keyboard size",
-    '11': "Increase keyboard size"
-  };
+  this.VKI_i18n = config.VKI_i18n;
 
 
   /* ***** Create keyboards ************************************** */
