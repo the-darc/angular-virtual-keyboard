@@ -4,7 +4,7 @@
   "authors": [
     "darc <darc.tec@gmail.com>"
   ],
-  "description": "A Virtual Keyboard Interface in AngularJs",
+  "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
   "main": "release/angular-virtual-keyboard.min.js",
   "keywords": [
     "Keyboard",
