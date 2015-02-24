@@ -72,7 +72,8 @@ angular.module('angular-virtual-keyboard', [])
 		}
 	};
 }])
-.directive('ngVirtualKeyboard', ['ngVirtualKeyboardService', '$timeout', function(ngVirtualKeyboardService, $timeout) {
+.directive('ngVirtualKeyboard', ['ngVirtualKeyboardService', '$timeout', '$injector',
+	function(ngVirtualKeyboardService, $timeout, $injector) {
 	return {
 		restrict: 'A',
 		require : '?ngModel',
@@ -85,11 +86,14 @@ angular.module('angular-virtual-keyboard', [])
 			}
 
 			// Don't show virtual keyboard in mobile devices (default)
-			var parser = new UAParser();
-			var device = parser.getDevice();
-			var isMobile = device.type === 'mobile' || device.type === 'tablet';
-			if (isMobile && attrs.vkForceMobile === undefined) {
-				return;
+			if ($injector.has('UAParser')) {
+				var UAParser = $injector.get('UAParser');
+				var parser = new UAParser();
+				var device = parser.getDevice();
+				var isMobile = device.type === 'mobile' || device.type === 'tablet';
+				if (isMobile && attrs.vkForceMobile === undefined) {
+					return;
+				}
 			}
 
 			ngVirtualKeyboardService.attach(elements[0], scope.config, function() {

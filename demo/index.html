@@ -5,11 +5,13 @@
 	<title>Angular Virtual Keyboard Demo</title>
 	<link href="../css/angular-virtual-keyboard.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+	<script src="../bower_components/angular-useragent-parser/release/angular-useragent-parser.min.js"></script>
+
 	<script src="../src/vki-core.js"></script>
 	<script src="../src/angular-virtual-keyboard.js"></script>
-	<script src="../bower_components/ua-parser-js/dist/ua-parser.min.js"></script>
+
 	<script>
-		angular.module('exampleApp', ['angular-virtual-keyboard'])
+		angular.module('exampleApp', ['angular-useragent-parser', 'angular-virtual-keyboard'])
 		.config(['VKI_Config', function(VKI_Config) {
 			VKI_Config.VKI_layout['Portugu\u00eas Brasileiro'] = {
 				'name': "Portuguese (Brazil)", 'keys': [
@@ -50,18 +52,12 @@
 	</script>
 </head>
 <body ng-app="exampleApp">
-	<center ng-controller="ExampleCtrl">
+	<div ng-controller="ExampleCtrl">
 
 		<h1>Angular Virtual Keyboard</h1>
 
-		<br><br><hr width="80%">
+		<br><br>
 		<h2>Default configuration</h2>
-
-		<h4>Keyboard binded by directive class: </h4>
-		<div>
-			<label>Input text: </label><input type='text' ng-model="t01" class="keyboardInput"/><br>
-			<em>(Model value: {{t01}})</em>
-		</div>
 
 		<h4>Keyboard binded by directive attribute: </h4>
 		<div>
@@ -69,8 +65,8 @@
 			<em>(Model value: {{t02}})</em>
 		</div>
 
+		<br><br>
 
-		<br><br><hr width="80%">
 		<h2>Custom configurations</h2>
 
 		<h4>Keyboard layout: Português Brasileiro</h4>
@@ -126,6 +122,6 @@
 			<label>Input Number: </label><input type='text' ng-model="t011" ng-virtual-keyboard="{VKI_kt: 'Numerico'}"/><br>
 			<em>(Model value: {{t011}})</em>
 		</div>
-	</center>
+	</div>
 </body>
 </html>
