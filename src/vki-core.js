@@ -76,6 +76,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_activeTab = 0;  // Tab moves to next: 1 = element, 2 = keyboard enabled element
   this.VKI_enterSubmit = true;  // Submit forms when Enter is pressed
   this.VKI_keyCenter = 3;
+  this.VKI_forcePosition = config.forcePosition || false;
 
   this.VKI_isIE = /*@cc_on!@*/false;
   this.VKI_isIE6 = /*@if(@_jscript_version == 5.6)!@end@*/false;
@@ -770,8 +771,11 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
     if (self.VKI_target) {
       var kPos = VKI_findPos(self.VKI_keyboard), wDim = VKI_innerDimensions(), sDis = VKI_scrollDist();
       var place = false, fudge = self.VKI_target.offsetHeight + 3;
+      if (self.VKI_forcePosition === 'top') {
+        fudge = -self.VKI_keyboard.offsetHeight - 3;
+      }
       if (force !== true) {
-        if (kPos[1] + self.VKI_keyboard.offsetHeight - sDis[1] - wDim[1] > 0) {
+        if (kPos[1] + self.VKI_keyboard.offsetHeight - sDis[1] - wDim[1] > 0 && self.VKI_forcePosition !== 'bottom') {
           place = true;
           fudge = -self.VKI_keyboard.offsetHeight - 3;
         } else if (kPos[1] - sDis[1] < 0) place = true;
