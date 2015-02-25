@@ -3,7 +3,7 @@
     "browser": true,
     "esnext": true,
     "bitwise": false,
-    "camelcase": false,
+    "camelcase": true,
     "curly": false,
     "eqeqeq": true,
     "immed": true,
