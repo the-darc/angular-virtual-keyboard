@@ -20,7 +20,8 @@
     "vki",
     "src",
     "demo",
-    "css"
+    "css",
+    "gulpfile.js"
   ],
   "dependencies": {
     "angular-useragent-parser": "~0.1.0"
