@@ -57,21 +57,21 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   self.keyInputCallback = keyInputCallback || function(){};
 
   this.VKI_version = "1.49";
-  this.VKI_showVersion = config.VKI_showVersion !== undefined ? config.VKI_showVersion : false;
+  this.VKI_showVersion = config.showVersion !== undefined ? config.showVersion : false;
   this.VKI_target = false;
   this.VKI_shift = this.VKI_shiftlock = false;
   this.VKI_altgr = this.VKI_altgrlock = false;
   this.VKI_dead = false;
   this.VKI_deadBox = true; // Show the dead keys checkbox
-  this.VKI_deadkeysOn = config.VKI_deadkeysOn !== undefined ? config.VKI_deadkeysOn : true;  // Turn dead keys on by default
-  this.VKI_numberPad = config.VKI_numberPad !== undefined ? config.VKI_numberPad : false;  // Allow user to open and close the number pad
+  this.VKI_deadkeysOn = config.deadkeysOn !== undefined ? config.deadkeysOn : true;  // Turn dead keys on by default
+  this.VKI_numberPad = config.numberPad !== undefined ? config.numberPad : false;  // Allow user to open and close the number pad
   this.VKI_numberPadOn = false;  // Show number pad by default
-  this.VKI_kts = this.VKI_kt = config.VKI_kt || 'US International';  // Default keyboard layout
-  this.VKI_langAdapt = !config.VKI_kt;  // Use lang attribute of input to select keyboard (Will be used if no keyboard layout was defined in custom config)
-  this.VKI_size = config.VKI_size >=1 && config.VKI_size <= 5 ? config.VKI_size : 3;  // Default keyboard size (1-5)
+  this.VKI_kts = this.VKI_kt = config.kt || 'US International';  // Default keyboard layout
+  this.VKI_langAdapt = !config.kt;  // Use lang attribute of input to select keyboard (Will be used if no keyboard layout was defined in custom config)
+  this.VKI_size = config.size >=1 && config.size <= 5 ? config.size : 3;  // Default keyboard size (1-5)
   this.VKI_sizeAdj = true;  // Allow user to adjust keyboard size
   this.VKI_clearPasswords = false;  // Clear password fields on focus
-  this.VKI_imageURI = config.VKI_imageURI !== undefined ? config.VKI_imageURI : "";  // If empty string, use imageless mode
+  this.VKI_imageURI = config.imageURI !== undefined ? config.imageURI : "";  // If empty string, use imageless mode
   this.VKI_clickless = 0;  // 0 = disabled, > 0 = delay in ms
   this.VKI_activeTab = 0;  // Tab moves to next: 1 = element, 2 = keyboard enabled element
   this.VKI_enterSubmit = true;  // Submit forms when Enter is pressed
@@ -84,10 +84,10 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_isOpera = RegExp("Opera").test(navigator.userAgent);
   this.VKI_isMoz = (!this.VKI_isWebKit && navigator.product == "Gecko");
 
-  this.VKI_showKbSelect = config.VKI_showKbSelect || false; // Defaults to hide keyboard selection combobox
+  this.VKI_showKbSelect = config.showKbSelect || false; // Defaults to hide keyboard selection combobox
 
   /* ***** i18n text strings ************************************* */
-  this.VKI_i18n = config.VKI_i18n;
+  this.VKI_i18n = config.i18n;
 
 
   /* ***** Create keyboards ************************************** */
@@ -176,7 +176,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
    * Attach the keyboard to an element
    *
    */
-  self.VKI_attach = function(elem) {
+  self.attachVki = function(elem) {
     if (elem.getAttribute("VKI_attached")) return false;
     if (self.VKI_imageURI) {
       var keybut = document.createElement('img');
@@ -381,6 +381,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           VKI_addListener(span, 'click', function() {
             self.VKI_target.value = "";
             self.VKI_target.focus();
+            self.keyInputCallback();
             return false;
           }, false);
           VKI_mouseEvents(span);
@@ -574,6 +575,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                       if (self.VKI_shift) self.VKI_modify("Shift");
                       if (self.VKI_altgr) self.VKI_modify("AltGr");
                       self.VKI_target.focus();
+                      self.keyInputCallback();
                       return true;
                     }, false);
                     break;
