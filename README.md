@@ -1,0 +1,98 @@
+[![Bower version](https://badge.fury.io/bo/angular-virtual-keyboard.svg)](http://badge.fury.io/bo/angular-virtual-keyboard)
+angular-virtual-keyboard
+========================
+An AngularJs Virtual Keyboard Interface based on [GreyWyvern VKI](http://www.greywyvern.com/code/javascript/keyboard). See example in the [Demo page](http://the-darc.github.io/angular-virtual-keyboard).
+
+![Demo image](http://the-darc.github.io/angular-virtual-keyboard/images/demo.png)
+
+## Bower install
+
+```sh
+$ bower install angular-virtual-keyboard
+```
+
+## Dependencies
+
+- Optional: [angular-useragent-parser](https://github.com/the-darc/angular-useragent-parser)  
+_Obs.: Required to auto-hide the keyboard interface in mobile devices or to use the 'vk-force-mobile' configuration._
+
+## Usage
+
+1. Import the ```angular-virtual-keyboard.min.js``` script in your page.
+
+2. Include the module ```angular-virtual-keyboard``` in your angular app.
+
+2. Include the module ```angular-useragent-parser``` in your angular app. _Optional, used to auto hide the virtual keyboard interface in mobile devices._
+
+3. Use the 'ng-virtual-keyboard' directive in any text fields, password fields or textareas:
+
+```html
+<input type='text' ng-model="yourModel" ng-virtual-keyboard/>
+```
+
+## Supported Configurations
+
+### Directive global configurations
+
+The angular-virtual-keyboard module use an [Angular.js Constant](https://docs.angularjs.org/api/auto/service/$provide#constant) named ``VKI_Config`` to handle the configurations that will be applied to all instances of the ``ng-virtual-keyboard`` directive. See list below:
+
+ - __Keyboard layouts configurations__ ``VKI_Config.VKI_layout``: Array of Keyboard Layout configurations. See [vki-layouts.js](https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-layouts.js) for keyboard layout configuration examples. 
+ - __Deadkeys configurations__ ``VKI_Config.VKI_deadkey`` Array of Deadkeys configurations. See [vki-deadkeys.js](https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-deadkeys.js) for deadkeys configuration examples. 
+ - __Default keyboard layout__ ``VKI_Config.VKI_kt`` Name of the layout configuration to be used as default (if no specific layout configuration is provided in the directive instance configuration). _Default: 'US International'_
+ - __i18n onfiguration__ ``VKI_Config.VKI_i18n``: An array to replace the default labels of the keyboard interface. See example below:  
+```javascript
+VKI_Config.VKI_i18n = {
+	'00': "Exibir teclado numérico",
+	'01': "Exibir teclado virtual",
+	'02': "Selecionar layout do teclado",
+	'03': "Teclas mortas",
+	'04': "Ligado",
+	'05': "Desligado",
+	'06': "Fechar teclado",
+	'07': "Limpar",
+	'08': "Limpar campo",
+	'09': "Versão",
+	'10': "Diminuir tamanho do teclado",
+	'11': "Aumentar tamanho do teclado"
+};
+```
+
+### Directive instance configurations
+
+The ``ng-virtual-keyboard`` could receive an array with the configurations that will be applied to the keyboard interface instance of the input field. See list below:
+
+ - __Default keyboard layout__ ``VKI_kt`` Change the default keyboard which displays first for each directive instance. _Default: Defined in global configuration_
+ - __Dead keys__ ``VKI_deadkeysOn`` To turn dead keys on or off by default. _Default: true_
+ - __Number pad__ ``VKI_numberPad`` To enable de number pad button. _Default: false_
+ - __VKI Version__ ``VKI_showVersion`` To show the VKI-core based version. _Default: false_
+ - __Imageless mode__ ``VKI_imageURI`` By default the keyboard will be show on input field focus. Pass a image URI to add a clickable image next to inputs and replace the on focus default behavior. _Default: false_
+ - __Keyboard size control__ ``VKI_size`` Five sizes based on font-size have been pre-programmed: 13px, 16px (default), 20px, 24px and 28px; corresponding to the sizes 1 to 5 respectively. _Default: 3_
+ - __Show in mobile__ ``VKI_showInMobile`` True to display the interface on mobiles devices. _Default: false_
+
+### Example of use
+
+_See example in the [Demo page](http://the-darc.github.io/angular-virtual-keyboard) or the [demo code](https://github.com/the-darc/angular-virtual-keyboard/blob/master/demo/index.html)_
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Daniel Campos
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

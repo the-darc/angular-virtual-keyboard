@@ -1,5 +1,6 @@
 angular.module('angular-virtual-keyboard', [])
 .constant('VKI_Config', {
+	/*jshint ignore:start */
 	// VKI_layout
 	'VKI_layout': {
 		'US International': {
@@ -46,21 +47,23 @@ angular.module('angular-virtual-keyboard', [])
 	// DEFAULT VKI_layout
 	VKI_kt: 'US International',
 	VKI_i18n: {
-		'00': "Display Number Pad",
-		'01': "Display virtual keyboard interface",
-		'02': "Select keyboard layout",
-		'03': "Dead keys",
-		'04': "On",
-		'05': "Off",
-		'06': "Close the keyboard",
-		'07': "Clear",
-		'08': "Clear this input",
-		'09': "Version",
-		'10': "Decrease keyboard size",
-		'11': "Increase keyboard size"
+		'00': 'Display Number Pad',
+		'01': 'Display virtual keyboard interface',
+		'02': 'Select keyboard layout',
+		'03': 'Dead keys',
+		'04': 'On',
+		'05': 'Off',
+		'06': 'Close the keyboard',
+		'07': 'Clear',
+		'08': 'Clear this input',
+		'09': 'Version',
+		'10': 'Decrease keyboard size',
+		'11': 'Increase keyboard size'
 	}
+	/*jshint ignore:end */
 })
 .service('ngVirtualKeyboardService', ['VKI_Config', function(VKI_Config) {
+	/*globals VKI */
 	return {
 		attach: function(element, config, inputCallback) {
 			config = config || {};
@@ -72,7 +75,8 @@ angular.module('angular-virtual-keyboard', [])
 		}
 	};
 }])
-.directive('ngVirtualKeyboard', ['ngVirtualKeyboardService', '$timeout', function(ngVirtualKeyboardService, $timeout) {
+.directive('ngVirtualKeyboard', ['ngVirtualKeyboardService', '$timeout', '$injector',
+	function(ngVirtualKeyboardService, $timeout, $injector) {
 	return {
 		restrict: 'A',
 		require : '?ngModel',
@@ -85,11 +89,14 @@ angular.module('angular-virtual-keyboard', [])
 			}
 
 			// Don't show virtual keyboard in mobile devices (default)
-			var parser = new UAParser();
-			var device = parser.getDevice();
-			var isMobile = device.type === 'mobile' || device.type === 'tablet';
-			if (isMobile && attrs.vkForceMobile === undefined) {
-				return;
+			if ($injector.has('UAParser')) {
+				var UAParser = $injector.get('UAParser');
+				var parser = new UAParser();
+				var device = parser.getDevice();
+				var isMobile = device.type === 'mobile' || device.type === 'tablet';
+				if (isMobile && config.VKI_showInMobile !== true) {
+					return;
+				}
 			}
 
 			ngVirtualKeyboardService.attach(elements[0], scope.config, function() {
@@ -98,5 +105,5 @@ angular.module('angular-virtual-keyboard', [])
 				});
 			});
 		}
-	}
+	};
 }]);
