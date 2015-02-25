@@ -391,6 +391,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           VKI_addListener(span, 'click', function() {
             self.VKI_target.value = "";
             self.VKI_target.focus();
+            self.keyInputCallback();
             return false;
           }, false);
           VKI_mouseEvents(span);
@@ -584,6 +585,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                       if (self.VKI_shift) self.VKI_modify("Shift");
                       if (self.VKI_altgr) self.VKI_modify("AltGr");
                       self.VKI_target.focus();
+                      self.keyInputCallback();
                       return true;
                     }, false);
                     break;
