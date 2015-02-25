@@ -26,8 +26,8 @@
     <!-- angular-virtual-keyboard configuration -->
     <script>
       angular.module('exampleApp', ['angular-useragent-parser', 'angular-virtual-keyboard'])
-      .config(['VKI_Config', function(VKI_Config) {
-        VKI_Config.VKI_layout['Portugu\u00eas Brasileiro'] = {
+      .config(['VKI_CONFIG', function(VKI_CONFIG) {
+        VKI_CONFIG.layout['Portugu\u00eas Brasileiro'] = {
           'name': "Portuguese (Brazil)", 'keys': [
           [["'", '"'], ["1", "!", "\u00b9"], ["2", "@", "\u00b2"], ["3", "#", "\u00b3"], ["4", "$", "\u00a3"], ["5", "%", "\u00a2"], ["6", "\u00a8", "\u00ac"], ["7", "&"], ["8", "*"], ["9", "("], ["0", ")"], ["-", "_"], ["=", "+", "\u00a7"], ["Bksp", "Bksp"]],
           [["Tab", "Tab"], ["q", "Q", "/"], ["w", "W", "?"], ["e", "E", "\u20ac"], ["r", "R"], ["t", "T"], ["y", "Y"], ["u", "U"], ["i", "I"], ["o", "O"], ["p", "P"], ["\u00b4", "`"], ["[", "{", "\u00aa"], ["Enter", "Enter"]],
@@ -36,7 +36,7 @@
           [[" ", " ", " ", " "], ["AltGr", "AltGr"]]
         ], 'lang': ["pt-BR"] };
 
-        VKI_Config.VKI_layout['Numerico'] = {
+        VKI_CONFIG.layout['Numerico'] = {
           'name': "Numerico", 'keys': [
           [["1", '1'], ["2", "2"], ["3", "3"], ["Bksp", "Bksp"]],
           [["4", "4"], ["5", "5"], ["6", '6'], ["Enter", "Enter"]],
@@ -44,10 +44,10 @@
           [["0", "0"], ["-"], ["+"], [","]]
         ], 'lang': ["pt-BR-num"] };
 
-        VKI_Config.VKI_kt = 'Portugu\u00eas Brasileiro';
+        VKI_CONFIG.kt = 'Portugu\u00eas Brasileiro';
 
         /* CHANGE TEXT LANGUAGE */
-        VKI_Config.VKI_i18n = {
+        VKI_CONFIG.i18n = {
          '00': "Exibir teclado numérico",
          '01': "Exibir teclado virtual",
          '02': "Selecionar layout do teclado",
@@ -112,19 +112,19 @@
 
   <h3>Keyboard layout: US International</h3>
   <div>
-    <label>Input text: </label><input type='text' ng-model="t02" ng-virtual-keyboard="{VKI_kt: 'US International', VKI_showKbSelect: true, VKI_numberPad: true, VKI_showVersion: true}"/><br>
+    <label>Input text: </label><input type='text' ng-model="t02" ng-virtual-keyboard="{kt: 'US International', showKbSelect: true, numberPad: true, showVersion: true}"/><br>
     <em>(Model value: {{t02}})</em>
   </div>
 
   <h3>Numeric customized keyboard layout</h3>
   <div>
-    <label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{VKI_kt: 'Numerico'}"/><br>
+    <label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{kt: 'Numerico'}"/><br>
     <em>(Model value: {{t03}})</em>
   </div>
 
   <h3>Default size changed and button action</h3>
   <div>
-    <label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{VKI_size: 5, VKI_imageURI: 'images/keyboard.png'}"/><br>
+    <label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{size: 5, imageURI: 'images/keyboard.png'}"/><br>
     <em>(Model value: {{t03}})</em>
   </div>
 <div>
