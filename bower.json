@@ -1,6 +1,6 @@
 {
   "name": "angular-virtual-keyboard",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "homepage": "https://github.com/the-darc/angular-virtual-keyboard",
   "authors": [
     "the-darc <darc.tec@gmail.com>"
@@ -23,7 +23,8 @@
     "css",
     "gulpfile.js"
   ],
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "angular-useragent-parser": "~0.1.0"
   }
 }

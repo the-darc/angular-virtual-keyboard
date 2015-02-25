@@ -68,6 +68,7 @@ The ``ng-virtual-keyboard`` could receive an array with the configurations that 
  - __Imageless mode__ ``imageURI`` By default the keyboard will be show on input field focus. Pass a image URI to add a clickable image next to inputs and replace the on focus default behavior. _Default: false_
  - __Keyboard size control__ ``size`` Five sizes based on font-size have been pre-programmed: 13px, 16px (default), 20px, 24px and 28px; corresponding to the sizes 1 to 5 respectively. _Default: 3_
  - __Show in mobile__ ``showInMobile`` True to display the interface on mobiles devices. _Default: false_
+ - __Foce position__ ``forcePosition`` Force to position the virtual keyborad above (_use ``"top"``_) or below (_use ``"bottom"``_) the input field. Use ``false`` to let the directive choose the better position. _Default: false_
 
 ### Example of use
 
