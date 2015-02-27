@@ -1,7 +1,7 @@
 /**
  * angular-virtual-keyboard
  * An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI
- * @version v0.1.1
+ * @version v0.3.0
  * @author the-darc <darc.tec@gmail.com>
  * @link https://github.com/the-darc/angular-virtual-keyboard
  * @license MIT
@@ -84,7 +84,6 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_imageURI = config.imageURI !== undefined ? config.imageURI : "";  // If empty string, use imageless mode
   this.VKI_clickless = 0;  // 0 = disabled, > 0 = delay in ms
   this.VKI_activeTab = 0;  // Tab moves to next: 1 = element, 2 = keyboard enabled element
-  this.VKI_enterSubmit = true;  // Submit forms when Enter is pressed
   this.VKI_keyCenter = 3;
   this.VKI_forcePosition = config.forcePosition || false;
 
@@ -95,6 +94,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_isOpera = RegExp("Opera").test(navigator.userAgent);
   this.VKI_isMoz = (!this.VKI_isWebKit && navigator.product == "Gecko");
 
+  this.VKI_enterSubmit = config.enterSubmit || false; // true to Submit forms when Enter is pressed. Fn to execute a custom function.
   this.VKI_showKbSelect = config.showKbSelect || false; // Defaults to hide keyboard selection combobox
 
   /* ***** i18n text strings ************************************* */
@@ -593,7 +593,9 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                   case "Enter":
                     VKI_addListener(td, 'click', function() {
                       if (self.VKI_target.nodeName != "TEXTAREA") {
-                        if (self.VKI_enterSubmit && self.VKI_target.form) {
+                        if (typeof self.VKI_enterSubmit === 'function') {
+                          self.VKI_enterSubmit.apply({}, [self.VKI_target.value]);
+                        } else if (self.VKI_enterSubmit && self.VKI_target.form) {
                           for (var z = 0, subm = false; z < self.VKI_target.form.elements.length; z++)
                             if (self.VKI_target.form.elements[z].type == "submit") subm = true;
                           if (!subm) self.VKI_target.form.submit();

@@ -22,9 +22,9 @@ _Obs.: Required to auto-hide the keyboard interface in mobile devices or to use 
 
 2. Include the module ```angular-virtual-keyboard``` in your angular app.
 
-2. Include the module ```angular-useragent-parser``` in your angular app. _Optional, used to auto hide the virtual keyboard interface in mobile devices._
+3. Include the module ```angular-useragent-parser``` in your angular app. _Optional, used to auto hide the virtual keyboard interface in mobile devices._
 
-3. Use the 'ng-virtual-keyboard' directive in any text fields, password fields or textareas:
+4. Use the 'ng-virtual-keyboard' directive in any text fields, password fields or textareas:
 
 ```html
 <input type='text' ng-model="yourModel" ng-virtual-keyboard/>
@@ -69,6 +69,7 @@ The ``ng-virtual-keyboard`` could receive an array with the configurations that 
  - __Keyboard size control__ ``size`` Five sizes based on font-size have been pre-programmed: 13px, 16px (default), 20px, 24px and 28px; corresponding to the sizes 1 to 5 respectively. _Default: 3_
  - __Show in mobile__ ``showInMobile`` True to display the interface on mobiles devices. _Default: false_
  - __Foce position__ ``forcePosition`` Force to position the virtual keyborad above (_use ``"top"``_) or below (_use ``"bottom"``_) the input field. Use ``false`` to let the directive choose the better position. _Default: false_
+ - __Enter callback__ ``enterSubmit`` Define a callback function for the enter key. Use ``true`` to submit forms when Enter is pressed or a function to execute a custom function. _Default: false_
 
 ### Example of use
 
