@@ -1,7 +1,7 @@
 /**
  * angular-virtual-keyboard
  * An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI
- * @version v0.3.0
+ * @version v0.3.1
  * @author the-darc <darc.tec@gmail.com>
  * @link https://github.com/the-darc/angular-virtual-keyboard
  * @license MIT
@@ -1022,9 +1022,10 @@ angular.module('angular-virtual-keyboard', [])
 			// Don't show virtual keyboard in mobile devices (default)
 			if ($injector.has('UAParser')) {
 				var UAParser = $injector.get('UAParser');
-				var parser = new UAParser();
-				var device = parser.getDevice();
-				var isMobile = device.type === 'mobile' || device.type === 'tablet';
+				var results = new UAParser().getResult();
+				var isMobile = results.device.type === 'mobile' || results.device.type === 'tablet';
+                isMobile = isMobile || (results.os && (results.os.name === 'Android'));
+                isMobile = isMobile || (results.os && (results.os.name === 'iOS'));
 				if (isMobile && scope.config.showInMobile !== true) {
 					return;
 				}
