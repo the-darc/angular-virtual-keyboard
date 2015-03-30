@@ -39,7 +39,7 @@ The angular-virtual-keyboard module use an [Angular.js Constant](https://docs.an
  - __Keyboard layouts configurations__ ``VKI_CONFIG.layout``: Array of Keyboard Layout configurations. See [vki-layouts.js](https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-layouts.js) for keyboard layout configuration examples. 
  - __Deadkeys configurations__ ``VKI_CONFIG.deadkey`` Array of Deadkeys configurations. See [vki-deadkeys.js](https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-deadkeys.js) for deadkeys configuration examples. 
  - __Default keyboard layout__ ``VKI_CONFIG.kt`` Name of the layout configuration to be used as default (if no specific layout configuration is provided in the directive instance configuration). _Default: 'US International'_
- - __i18n onfiguration__ ``VKI_CONFIG.i18n``: An array to replace the default labels of the keyboard interface. See example below:  
+ - __i18n configuration__ ``VKI_CONFIG.i18n``: An array to replace the default labels of the keyboard interface. See example below:  
 ```javascript
 VKI_CONFIG.i18n = {
 	'00': "Exibir teclado numérico",
