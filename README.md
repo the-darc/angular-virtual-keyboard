@@ -39,7 +39,7 @@ The angular-virtual-keyboard module use an [Angular.js Constant](https://docs.an
  - __Keyboard layouts configurations__ ``VKI_CONFIG.layout``: Array of Keyboard Layout configurations. See [vki-layouts.js](https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-layouts.js) for keyboard layout configuration examples. 
  - __Deadkeys configurations__ ``VKI_CONFIG.deadkey`` Array of Deadkeys configurations. See [vki-deadkeys.js](https://github.com/the-darc/angular-virtual-keyboard/blob/master/src/vki-deadkeys.js) for deadkeys configuration examples. 
  - __Default keyboard layout__ ``VKI_CONFIG.kt`` Name of the layout configuration to be used as default (if no specific layout configuration is provided in the directive instance configuration). _Default: 'US International'_
- - __i18n onfiguration__ ``VKI_CONFIG.i18n``: An array to replace the default labels of the keyboard interface. See example below:  
+ - __i18n configuration__ ``VKI_CONFIG.i18n``: An array to replace the default labels of the keyboard interface. See example below:  
 ```javascript
 VKI_CONFIG.i18n = {
 	'00': "Exibir teclado numérico",
@@ -69,7 +69,7 @@ The ``ng-virtual-keyboard`` could receive an array with the configurations that 
  - __Keyboard size control__ ``size`` Five sizes based on font-size have been pre-programmed: 13px, 16px (default), 20px, 24px and 28px; corresponding to the sizes 1 to 5 respectively. _Default: 3_
  - __Show in mobile__ ``showInMobile`` True to display the interface on mobiles devices. _Default: false_
  - __Foce position__ ``forcePosition`` Force to position the virtual keyborad above (_use ``"top"``_) or below (_use ``"bottom"``_) the input field. Use ``false`` to let the directive choose the better position. _Default: false_
- - __Enter callback__ ``enterSubmit`` Define a callback function for the enter key. Use ``true`` to submit forms when Enter is pressed or a function to execute a custom function. _Default: false_
+ - __Enter callback__ ``enterSubmit`` Define a callback function for the enter key. Use ``true`` to submit forms when Enter is pressed or a function to execute a custom function. _Default: false_ (See _[enterSubmit issues #5](https://github.com/the-darc/angular-virtual-keyboard/issues/5)_)
 
 ### Example of use
 
