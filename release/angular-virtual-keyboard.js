@@ -1030,7 +1030,7 @@ angular.module('angular-virtual-keyboard', [])
 			config = config || {};
 			config.i18n = config.i18n || VKI_CONFIG.i18n;
 			config.kt = config.kt || VKI_CONFIG.kt;
-			config.relative = config.relative || VKI_CONFIG.relative;
+			config.relative = config.relative === false ? false : VKI_CONFIG.relative;
 			config.keyCenter = config.keyCenter || VKI_CONFIG.keyCenter;
 
 			var vki = new VKI(config, VKI_CONFIG.layout, VKI_CONFIG.deadkey, inputCallback);
