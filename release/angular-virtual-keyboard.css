@@ -205,7 +205,7 @@ table.keyboardInputMaster tbody tr td table tbody tr td {
   -o-transition:background-color .15s ease-in-out;
   transition:background-color .15s ease-in-out;
 }
-table.keyboardInputMaster tbody tr td table tbody tr td.last {
+table.keyboardInputMaster.relativeKeyboard tbody tr td table tbody tr td.last {
   width:99%;
 }
 table.keyboardInputMaster tbody tr td table tbody tr td.space {
@@ -268,4 +268,10 @@ table.keyboardInputMaster tbody tr td div var {
   margin:0px 3px;
   vertical-align:middle;
   cursor:pointer;
+}
+
+.keyboardsArea table {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }

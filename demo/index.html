@@ -44,6 +44,8 @@
 			// 	'10': "Diminuir tamanho do teclado",
 			// 	'11': "Aumentar tamanho do teclado"
 			// };
+
+			VKI_CONFIG.relative = false;
 		}])
 		.controller('ExampleCtrl', ['$scope', function($scope){
 			// Your controller code comes here
@@ -70,7 +72,7 @@
 
 		<h4>Keyboard layout: Português Brasileiro</h4>
 		<div>
-			<label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{kt: 'Portugu\u00eas Brasileiro'}"/><br>
+			<label>Input text: </label><input type='text' ng-model="t03" ng-virtual-keyboard="{kt: 'Portugu\u00eas Brasileiro', relative: true}"/><br>
 			<em>(Model value: {{t03}})</em>
 		</div>
 
