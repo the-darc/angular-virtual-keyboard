@@ -5,9 +5,6 @@ table.keyboardInputMaster {
   border-right:1px solid #888888;
   border-bottom:1px solid #444444;
   border-left:1px solid #cccccc;
-  -webkit-border-radius:0.6em;
-  -moz-border-radius:0.6em;
-  border-radius:0.6em;
   -webkit-box-shadow:0px 2px 10px #444444;
   -moz-box-shadow:0px 2px 10px #444444;
   box-shadow:0px 2px 10px #444444;
@@ -26,6 +23,20 @@ table.keyboardInputMaster {
   -moz-user-select:none;
   cursor:default;
 }
+table.keyboardInputMaster {
+  -webkit-border-top-left-radius:0.6em;
+  -webkit-border-top-right-radius:0.6em;
+  -moz-border-top-left-radius:0.6em;
+  -moz-border-top-right-radius:0.6em;
+  border-top-left-radius:0.6em;
+  border-top-right-radius:0.6em;
+}
+table.keyboardInputMaster.relativeKeyboard {
+  -webkit-border-radius:0.6em;
+  -moz-border-radius:0.6em;
+  border-radius:0.6em;
+}
+
 table.keyboardInputMaster * {
   position:static;
   color:#000000;
@@ -67,6 +78,8 @@ table.keyboardInputMaster thead tr th {
   background-color:#999999;
   white-space:nowrap;
   text-align:right;
+}
+table.keyboardInputMaster thead tr th {
   -webkit-border-radius:0.6em 0.6em 0px 0px;
   -moz-border-radius:0.6em 0.6em 0px 0px;
   border-radius:0.6em 0.6em 0px 0px;
@@ -185,6 +198,7 @@ table.keyboardInputMaster tbody tr td table.keyboardInputCenter {
   width:auto;
   margin:0px auto;
 }
+
 table.keyboardInputMaster tbody tr td table tbody tr td {
   vertical-align:middle;
   padding:0px 0.45em;
@@ -205,7 +219,7 @@ table.keyboardInputMaster tbody tr td table tbody tr td {
   -o-transition:background-color .15s ease-in-out;
   transition:background-color .15s ease-in-out;
 }
-table.keyboardInputMaster tbody tr td table tbody tr td.last {
+table.keyboardInputMaster.relativeKeyboard tbody tr td table tbody tr td.last {
   width:99%;
 }
 table.keyboardInputMaster tbody tr td table tbody tr td.space {
@@ -268,4 +282,10 @@ table.keyboardInputMaster tbody tr td div var {
   margin:0px 3px;
   vertical-align:middle;
   cursor:pointer;
+}
+
+.keyboardsArea table {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -57,3 +57,24 @@ gulp.task('build', function() {
 gulp.task('default', ['jshint', 'build'], function() {
 	gulp.watch(path.src.files, ['jshint', 'build']);
 });
+
+gulp.task('changelog', function(done) {
+	var pkg = require('./bower.json');
+	var changelog = require('conventional-changelog');
+	var fs = require('fs');
+
+	var options = {
+		repository: pkg.homepage,
+		version: pkg.version,
+		file: 'CHANGELOG.md'
+	};
+
+	var filePath = './' + options.file;
+	changelog(options, function(err, log) {
+		if (err) {
+			throw err;
+		}
+
+		fs.writeFile(filePath, log, done);
+	});
+});
