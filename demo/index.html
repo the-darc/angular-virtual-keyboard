@@ -52,7 +52,7 @@
 		}]);
 	</script>
 </head>
-<body ng-app="exampleApp">
+<body ng-app="exampleApp" style="padding-bottom: 300px">
 	<div ng-controller="ExampleCtrl">
 
 		<h1>Angular Virtual Keyboard</h1>
@@ -134,6 +134,12 @@
 		<div>
 			<label>Input Number: </label><input type='text' ng-model="t011" ng-virtual-keyboard="{kt: 'Numerico'}"/><br>
 			<em>(Model value: {{t011}})</em>
+		</div>
+
+		<h4>E-mail field</h4>
+		<div>
+			<label>Input e-mail: </label><input type='email' ng-model="t012" ng-virtual-keyboard="{kt: 'US International', numberPad: true, 	showVersion: true, relative: false}"/><br>
+			<em>(Model value: {{t012}})</em>
 		</div>
 	</div>
 </body>

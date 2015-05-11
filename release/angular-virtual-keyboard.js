@@ -1,7 +1,7 @@
 /**
  * angular-virtual-keyboard
  * An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI
- * @version v0.4.0
+ * @version v0.4.1
  * @author the-darc <darc.tec@gmail.com>
  * @link https://github.com/the-darc/angular-virtual-keyboard
  * @license MIT
@@ -182,6 +182,14 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
     [["1"], ["2"], ["3"], ["-"]],
     [["0"], ["."], ["="], ["+"]]
   ];
+
+  function hasSelectionStartEnd(elem) {
+    var hasSelection = false;
+    try {
+      hasSelection = !isNaN(elem.selectionStart) && !isNaN(elem.selectionEnd);
+    } catch(e) {};
+    return hasSelection;
+  }
 
 
   /* ****************************************************************
@@ -593,7 +601,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                   case "Bksp":
                     VKI_addListener(td, 'click', function() {
                       self.VKI_target.focus();
-                      if (self.VKI_target.setSelectionRange && !self.VKI_target.readOnly) {
+                      if (self.VKI_target.setSelectionRange && hasSelectionStartEnd(self.VKI_target) && !self.VKI_target.readOnly) {
                         var rng = [self.VKI_target.selectionStart, self.VKI_target.selectionEnd];
                         if (rng[0] < rng[1]) rng[0]++;
                         self.VKI_target.value = self.VKI_target.value.substr(0, rng[0] - 1) + self.VKI_target.value.substr(rng[1]);
@@ -730,7 +738,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
     if (typeof this.VKI_target.maxlength == "undefined" ||
         this.VKI_target.maxlength < 0 ||
         this.VKI_target.value.length < this.VKI_target.maxlength) {
-      if (this.VKI_target.setSelectionRange && !this.VKI_target.readOnly && !this.VKI_isIE) {
+      if (this.VKI_target.setSelectionRange && hasSelectionStartEnd(this.VKI_target) && !this.VKI_target.readOnly && !this.VKI_isIE) {
         var rng = [this.VKI_target.selectionStart, this.VKI_target.selectionEnd];
         this.VKI_target.value = this.VKI_target.value.substr(0, rng[0]) + text + this.VKI_target.value.substr(rng[1]);
         if (text == "\n" && this.VKI_isOpera) rng[0]++;
