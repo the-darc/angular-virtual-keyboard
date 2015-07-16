@@ -7,7 +7,7 @@
     "dem1k <dem1k@ya.ru>"
   ],
   "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
-  "main": "release/angular-virtual-keyboard.min.js",
+  "main": "release/angular-virtual-keyboard.js",
   "keywords": [
     "Keyboard",
     "Virtual",
@@ -22,9 +22,10 @@
     "src",
     "demo",
     "css",
-    "gulpfile.js"
+    "gulpfile.js",
+    "test",
+    "tests"
   ],
-  "dependencies": {},
   "devDependencies": {
     "angular-useragent-parser": "~0.1.0"
   }
