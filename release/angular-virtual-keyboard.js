@@ -229,14 +229,24 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           this.range = document.selection.createRange();
       };
     }
-    VKI_addListener(elem, 'click', function(e) {
-      if (self.VKI_target == this) {
-        e = e || event;
-        if (e.stopPropagation) { e.stopPropagation(); } else e.cancelBubble = true;
-      } return false;
-    }, false);
+      VKI_addListener(elem, 'click', function(e) {
+          if (self.VKI_target == this) {
+              e = e || event;
+              if (e.stopPropagation) { e.stopPropagation(); } else e.cancelBubble = true;
+              // For triggering close to non-focused virtual keyboard elements
+              angular.forEach(angular.element(document).find(':input'), function(value) {
+                  var inputChild = angular.element(value);
+                  if(!angular.equals(elem, value)) {
+                      inputChild.triggerHandler('close');
+                  }
+              });
+          }
+          return false;
+      }, false);
+      // Attach close event handler.
+    angular.element(elem).bind('close', function(){ self.VKI_close(); });
     if (self.VKI_isMoz)
-      elem.addEventListener('blur', function() { this.setAttribute('_scrollTop', this.scrollTop); }, false);
+        elem.addEventListener('blur', function() { this.setAttribute('_scrollTop', this.scrollTop); }, false);
 
     VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(); }, false);
   };
