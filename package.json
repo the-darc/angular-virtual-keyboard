@@ -1,6 +1,6 @@
 {
   "name": "angular-virtual-keyboard",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/the-darc/angular-virtual-keyboard.git"
+    "url": "https://github.com/dem1k/angular-virtual-keyboard.git"
   },
   "author": "the-darc <darc.tec@gmail.com>",
   "license": "MIT",
