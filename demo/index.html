@@ -46,6 +46,7 @@
 			// };
 
 			// VKI_CONFIG.relative = true;
+			// VKI_CONFIG.sizeAdj = false;
 		}])
 		.controller('ExampleCtrl', ['$scope', function($scope){
 			// Your controller code comes here
@@ -140,6 +141,12 @@
 		<div>
 			<label>Input e-mail: </label><input type='email' ng-model="t012" ng-virtual-keyboard="{kt: 'US International', numberPad: true, 	showVersion: true, relative: false}"/><br>
 			<em>(Model value: {{t012}})</em>
+		</div>
+
+		<h4>Textarea fields</h4>
+		<div>
+			<label>Input e-mail: </label><textarea ng-model="t013" ng-virtual-keyboard="{kt: 'US International', numberPad: true, showVersion: true, sizeAdj: false}"/><br>
+			<em>(Model value: {{t013}})</em>
 		</div>
 	</div>
 </body>

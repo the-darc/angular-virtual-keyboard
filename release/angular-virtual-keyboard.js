@@ -1,7 +1,7 @@
 /**
  * angular-virtual-keyboard
  * An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI
- * @version v0.4.1
+ * @version v0.4.2
  * @author the-darc <darc.tec@gmail.com>
  * @link https://github.com/the-darc/angular-virtual-keyboard
  * @license MIT
@@ -79,7 +79,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_kts = this.VKI_kt = config.kt || 'US International';  // Default keyboard layout
   this.VKI_langAdapt = !config.kt;  // Use lang attribute of input to select keyboard (Will be used if no keyboard layout was defined in custom config)
   this.VKI_size = config.size >=1 && config.size <= 5 ? config.size : 3;  // Default keyboard size (1-5)
-  this.VKI_sizeAdj = true;  // Allow user to adjust keyboard size
+  this.VKI_sizeAdj = config.sizeAdj === false ? false : true;  // Allow user to adjust keyboard size
   this.VKI_clearPasswords = false;  // Clear password fields on focus
   this.VKI_imageURI = config.imageURI !== undefined ? config.imageURI : "";  // If empty string, use imageless mode
   this.VKI_clickless = 0;  // 0 = disabled, > 0 = delay in ms
@@ -214,7 +214,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
     } else {
       elem.onfocus = function() {
         if (self.VKI_target != this) {
-          if (self.VKI_target) self.VKI_close();
+          if (self.VKI_target) self.VKI_close(false);
           self.VKI_show(this);
         }
       };
@@ -238,7 +238,10 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
     if (self.VKI_isMoz)
       elem.addEventListener('blur', function() { this.setAttribute('_scrollTop', this.scrollTop); }, false);
 
-    VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(); }, false);
+    VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(false); }, false);
+
+    // Attach close event handler.
+    angular.element(elem).bind('VKI_close', function(){self.VKI_close(false);});
   };
 
 
@@ -365,6 +368,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(span, 'click', function() {
               kbNumpad.style.display = (!kbNumpad.style.display) ? "none" : "";
               self.VKI_position(true);
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(span);
             th.appendChild(span);
@@ -383,6 +387,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(small, 'click', function() {
               --self.VKI_size;
               self.VKI_kbsize();
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(small);
               small.appendChild(document.createTextNode(this.VKI_isIElt8 ? "\u2193" : "\u21d3"));
@@ -392,6 +397,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(big, 'click', function() {
               ++self.VKI_size;
               self.VKI_kbsize();
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(big);
               big.appendChild(document.createTextNode(this.VKI_isIElt8 ? "\u2191" : "\u21d1"));
@@ -413,7 +419,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
         var strong = document.createElement('strong');
             strong.appendChild(document.createTextNode('X'));
             strong.title = this.VKI_i18n['06'];
-          VKI_addListener(strong, 'click', function() { self.VKI_close(); }, false);
+          VKI_addListener(strong, 'click', function() { self.VKI_close(true); }, false);
           VKI_mouseEvents(strong);
           th.appendChild(strong);
 
@@ -582,7 +588,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                       if (self.VKI_activeTab) {
                         if (self.VKI_target.form) {
                           var target = self.VKI_target, elems = target.form.elements;
-                          self.VKI_close();
+                          self.VKI_close(false);
                           for (var z = 0, me = false, j = -1; z < elems.length; z++) {
                             if (j == -1 && elems[z].getAttribute("VKI_attached")) j = z;
                             if (me) {
@@ -630,7 +636,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                             if (self.VKI_target.form.elements[z].type == "submit") subm = true;
                           if (!subm) self.VKI_target.form.submit();
                         }
-                        self.VKI_close();
+                        self.VKI_close(false);
                       } else self.VKI_insert("\n");
                       return true;
                     }, false);
@@ -686,17 +692,25 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           case "Alt":
           case "AltGr":
             if (this.VKI_altgr) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "AltLk":
             if (this.VKI_altgrlock) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "Shift":
             if (this.VKI_shift) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "Caps":
             if (this.VKI_shiftlock) className.push("pressed");
+            self.VKI_target.focus();
             break;
-          case "Tab": case "Enter": case "Bksp": break;
+          case "Tab":
+          case "Bksp":
+            self.VKI_target.focus();
+          case "Enter":
+          break;
           default:
             if (type) {
               tds[y].removeChild(tds[y].firstChild);
@@ -801,9 +815,25 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
       if (self.VKI_isMoz || self.VKI_isWebKit) this.VKI_position(true);
       this.VKI_target.blur();
       this.VKI_target.focus();
-    } else this.VKI_close();
+
+      this.VKI_closeOthers();
+    } else this.VKI_close(false);
   };
 
+  /* ****************************************************************
+   * For triggering close to non-focused virtual keyboard elements
+   *
+   */
+  this.VKI_closeOthers = function() {
+    function fireCloseEvent(angularElement) {
+      if(angularElement.getAttribute('VKI_attached') === 'true' && !angular.equals(self.VKI_target, angularElement)) {
+        var inputChild = angular.element(angularElement);
+        inputChild.triggerHandler('VKI_close');
+      }
+    }
+    angular.forEach(angular.element(document).find('input'), fireCloseEvent);
+    angular.forEach(angular.element(document).find('textarea'), fireCloseEvent);
+  };
 
   /* ****************************************************************
    * Position the keyboard
@@ -865,7 +895,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
    * Close the keyboard interface
    *
    */
-  this.VKI_close = function() {
+  this.VKI_close = function(keepFocus) {
     if (this.VKI_target) {
       try {
         this.VKI_keyboard.parentNode.removeChild(this.VKI_keyboard);
@@ -877,7 +907,9 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           this.VKI_buildKeys();
         } kbSelect.getElementsByTagName('ol')[0].style.display = "";;
       }
-      this.VKI_target.focus();
+      if (keepFocus) {
+        this.VKI_target.focus();
+      }
       if (this.VKI_isIE) {
         setTimeout(function() { self.VKI_target = false; }, 0);
       } else this.VKI_target = false;
@@ -957,7 +989,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   //       if (ex.nodeName == "TEXTAREA" || ex.type == "text" || ex.type == "password")
     //      if (ex.className.indexOf("keyboardInput") > -1) self.VKI_attach(ex);
 
-  //   VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(); }, false);
+  //   VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(true); }, false);
   // }
   // VKI_addListener(window, 'load', VKI_buildKeyboardInputs, false);
 
@@ -1029,7 +1061,8 @@ angular.module('angular-virtual-keyboard', [])
 		'10': 'Decrease keyboard size',
 		'11': 'Increase keyboard size'
 	},
-	relative: true
+	relative: true,
+	sizeAdj: true
 })
 .service('ngVirtualKeyboardService', ['VKI_CONFIG', function(VKI_CONFIG) {
 	/*globals VKI */
@@ -1040,6 +1073,7 @@ angular.module('angular-virtual-keyboard', [])
 			config.kt = config.kt || VKI_CONFIG.kt;
 			config.relative = config.relative === false ? false : VKI_CONFIG.relative;
 			config.keyCenter = config.keyCenter || VKI_CONFIG.keyCenter;
+			config.sizeAdj = config.sizeAdj === false ? false : VKI_CONFIG.sizeAdj;
 
 			var vki = new VKI(config, VKI_CONFIG.layout, VKI_CONFIG.deadkey, inputCallback);
 			vki.attachVki(element);
