@@ -244,6 +244,13 @@ h1.header {
 	margin-top: 0;
 }
 
+p.version {
+  margin: -30px -15px 0 0;
+  text-align: right;
+  font-style: italic;
+  font-family: Arvo, sans-serif;
+  color: #aaa;
+}
 
 h1.header, a.header, a.name, header a{
 	color: #fff;
