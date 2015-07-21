@@ -1,7 +1,7 @@
 {
   "name": "angular-virtual-keyboard",
   "version": "0.4.2",
-  "description": "",
+  "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,11 @@
   },
   "author": "the-darc <darc.tec@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "Keyboard",
+    "Virtual",
+    "VKI"
+  ],
   "bugs": {
     "url": "https://github.com/the-darc/angular-virtual-keyboard/issues"
   },
