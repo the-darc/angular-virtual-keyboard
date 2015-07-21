@@ -1,30 +1,40 @@
 {
-  "name": "angular-virtual-keyboard",
-  "version": "0.4.1",
-  "homepage": "https://github.com/the-darc/angular-virtual-keyboard",
-  "authors": [
-    "the-darc <darc.tec@gmail.com>"
-  ],
-  "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
-  "main": "release/angular-virtual-keyboard.min.js",
-  "keywords": [
-    "Keyboard",
-    "Virtual",
-    "VKI"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "vki",
-    "src",
-    "demo",
-    "css",
-    "gulpfile.js"
-  ],
-  "dependencies": {},
-  "devDependencies": {
-    "angular-useragent-parser": "~0.1.0"
-  }
+    "name": "angular-virtual-keyboard",
+    "version": "0.4.2",
+    "homepage": "https://github.com/dem1k/angular-virtual-keyboard",
+    "authors": [
+        "the-darc <darc.tec@gmail.com>",
+        "dem1k <dem1k@ya.ru>"
+    ],
+    "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
+    "main": [
+        "release/angular-virtual-keyboard.css",
+        "release/angular-virtual-keyboard.js",
+        "release/angular-virtual-keyboard.min.js"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dem1k/angular-virtual-keyboard.git"
+    },
+    "keywords": [
+        "Keyboard",
+        "Virtual",
+        "VKI"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "vki",
+        "src",
+        "demo",
+        "css",
+        "gulpfile.js",
+        "test",
+        "tests"
+    ],
+    "devDependencies": {
+        "angular-useragent-parser": "~0.1.0"
+    }
 }
