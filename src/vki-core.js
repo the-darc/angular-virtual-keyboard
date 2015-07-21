@@ -358,6 +358,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(span, 'click', function() {
               kbNumpad.style.display = (!kbNumpad.style.display) ? "none" : "";
               self.VKI_position(true);
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(span);
             th.appendChild(span);
@@ -376,6 +377,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(small, 'click', function() {
               --self.VKI_size;
               self.VKI_kbsize();
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(small);
               small.appendChild(document.createTextNode(this.VKI_isIElt8 ? "\u2193" : "\u21d3"));
@@ -385,6 +387,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(big, 'click', function() {
               ++self.VKI_size;
               self.VKI_kbsize();
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(big);
               big.appendChild(document.createTextNode(this.VKI_isIElt8 ? "\u2191" : "\u21d1"));
@@ -679,17 +682,25 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           case "Alt":
           case "AltGr":
             if (this.VKI_altgr) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "AltLk":
             if (this.VKI_altgrlock) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "Shift":
             if (this.VKI_shift) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "Caps":
             if (this.VKI_shiftlock) className.push("pressed");
+            self.VKI_target.focus();
             break;
-          case "Tab": case "Enter": case "Bksp": break;
+          case "Tab":
+          case "Bksp":
+            self.VKI_target.focus();
+          case "Enter":
+          break;
           default:
             if (type) {
               tds[y].removeChild(tds[y].firstChild);
