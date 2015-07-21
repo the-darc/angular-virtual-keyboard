@@ -69,7 +69,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_kts = this.VKI_kt = config.kt || 'US International';  // Default keyboard layout
   this.VKI_langAdapt = !config.kt;  // Use lang attribute of input to select keyboard (Will be used if no keyboard layout was defined in custom config)
   this.VKI_size = config.size >=1 && config.size <= 5 ? config.size : 3;  // Default keyboard size (1-5)
-  this.VKI_sizeAdj = true;  // Allow user to adjust keyboard size
+  this.VKI_sizeAdj = config.sizeAdj === false ? false : true;  // Allow user to adjust keyboard size
   this.VKI_clearPasswords = false;  // Clear password fields on focus
   this.VKI_imageURI = config.imageURI !== undefined ? config.imageURI : "";  // If empty string, use imageless mode
   this.VKI_clickless = 0;  // 0 = disabled, > 0 = delay in ms
