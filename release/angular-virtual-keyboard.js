@@ -214,7 +214,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
     } else {
       elem.onfocus = function() {
         if (self.VKI_target != this) {
-          if (self.VKI_target) self.VKI_close();
+          if (self.VKI_target) self.VKI_close(false);
           self.VKI_show(this);
         }
       };
@@ -238,7 +238,10 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
     if (self.VKI_isMoz)
       elem.addEventListener('blur', function() { this.setAttribute('_scrollTop', this.scrollTop); }, false);
 
-    VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(); }, false);
+    VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(false); }, false);
+
+    // Attach close event handler.
+    angular.element(elem).bind('VKI_close', function(){self.VKI_close(false);});
   };
 
 
@@ -413,7 +416,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
         var strong = document.createElement('strong');
             strong.appendChild(document.createTextNode('X'));
             strong.title = this.VKI_i18n['06'];
-          VKI_addListener(strong, 'click', function() { self.VKI_close(); }, false);
+          VKI_addListener(strong, 'click', function() { self.VKI_close(true); }, false);
           VKI_mouseEvents(strong);
           th.appendChild(strong);
 
@@ -582,7 +585,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                       if (self.VKI_activeTab) {
                         if (self.VKI_target.form) {
                           var target = self.VKI_target, elems = target.form.elements;
-                          self.VKI_close();
+                          self.VKI_close(false);
                           for (var z = 0, me = false, j = -1; z < elems.length; z++) {
                             if (j == -1 && elems[z].getAttribute("VKI_attached")) j = z;
                             if (me) {
@@ -630,7 +633,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
                             if (self.VKI_target.form.elements[z].type == "submit") subm = true;
                           if (!subm) self.VKI_target.form.submit();
                         }
-                        self.VKI_close();
+                        self.VKI_close(false);
                       } else self.VKI_insert("\n");
                       return true;
                     }, false);
@@ -801,9 +804,25 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
       if (self.VKI_isMoz || self.VKI_isWebKit) this.VKI_position(true);
       this.VKI_target.blur();
       this.VKI_target.focus();
-    } else this.VKI_close();
+
+      this.VKI_closeOthers();
+    } else this.VKI_close(false);
   };
 
+  /* ****************************************************************
+   * For triggering close to non-focused virtual keyboard elements
+   *
+   */
+  this.VKI_closeOthers = function() {
+    function fireCloseEvent(angularElement) {
+      if(angularElement.getAttribute('VKI_attached') === 'true' && !angular.equals(self.VKI_target, angularElement)) {
+        var inputChild = angular.element(angularElement);
+        inputChild.triggerHandler('VKI_close');
+      }
+    }
+    angular.forEach(angular.element(document).find('input'), fireCloseEvent);
+    angular.forEach(angular.element(document).find('textarea'), fireCloseEvent);
+  };
 
   /* ****************************************************************
    * Position the keyboard
@@ -865,7 +884,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
    * Close the keyboard interface
    *
    */
-  this.VKI_close = function() {
+  this.VKI_close = function(keepFocus) {
     if (this.VKI_target) {
       try {
         this.VKI_keyboard.parentNode.removeChild(this.VKI_keyboard);
@@ -877,7 +896,9 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           this.VKI_buildKeys();
         } kbSelect.getElementsByTagName('ol')[0].style.display = "";;
       }
-      this.VKI_target.focus();
+      if (keepFocus) {
+        this.VKI_target.focus();
+      }
       if (this.VKI_isIE) {
         setTimeout(function() { self.VKI_target = false; }, 0);
       } else this.VKI_target = false;
@@ -957,7 +978,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   //       if (ex.nodeName == "TEXTAREA" || ex.type == "text" || ex.type == "password")
     //      if (ex.className.indexOf("keyboardInput") > -1) self.VKI_attach(ex);
 
-  //   VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(); }, false);
+  //   VKI_addListener(document.documentElement, 'click', function(e) { self.VKI_close(true); }, false);
   // }
   // VKI_addListener(window, 'load', VKI_buildKeyboardInputs, false);
 
