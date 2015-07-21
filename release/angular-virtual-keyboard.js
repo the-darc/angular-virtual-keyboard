@@ -1,7 +1,7 @@
 /**
  * angular-virtual-keyboard
  * An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI
- * @version v0.4.1
+ * @version v0.4.2
  * @author the-darc <darc.tec@gmail.com>
  * @link https://github.com/the-darc/angular-virtual-keyboard
  * @license MIT
@@ -79,7 +79,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_kts = this.VKI_kt = config.kt || 'US International';  // Default keyboard layout
   this.VKI_langAdapt = !config.kt;  // Use lang attribute of input to select keyboard (Will be used if no keyboard layout was defined in custom config)
   this.VKI_size = config.size >=1 && config.size <= 5 ? config.size : 3;  // Default keyboard size (1-5)
-  this.VKI_sizeAdj = true;  // Allow user to adjust keyboard size
+  this.VKI_sizeAdj = config.sizeAdj === false ? false : true;  // Allow user to adjust keyboard size
   this.VKI_clearPasswords = false;  // Clear password fields on focus
   this.VKI_imageURI = config.imageURI !== undefined ? config.imageURI : "";  // If empty string, use imageless mode
   this.VKI_clickless = 0;  // 0 = disabled, > 0 = delay in ms
@@ -368,6 +368,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(span, 'click', function() {
               kbNumpad.style.display = (!kbNumpad.style.display) ? "none" : "";
               self.VKI_position(true);
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(span);
             th.appendChild(span);
@@ -386,6 +387,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(small, 'click', function() {
               --self.VKI_size;
               self.VKI_kbsize();
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(small);
               small.appendChild(document.createTextNode(this.VKI_isIElt8 ? "\u2193" : "\u21d3"));
@@ -395,6 +397,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
             VKI_addListener(big, 'click', function() {
               ++self.VKI_size;
               self.VKI_kbsize();
+              self.VKI_target.focus();
             }, false);
             VKI_mouseEvents(big);
               big.appendChild(document.createTextNode(this.VKI_isIElt8 ? "\u2191" : "\u21d1"));
@@ -689,17 +692,25 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
           case "Alt":
           case "AltGr":
             if (this.VKI_altgr) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "AltLk":
             if (this.VKI_altgrlock) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "Shift":
             if (this.VKI_shift) className.push("pressed");
+            self.VKI_target.focus();
             break;
           case "Caps":
             if (this.VKI_shiftlock) className.push("pressed");
+            self.VKI_target.focus();
             break;
-          case "Tab": case "Enter": case "Bksp": break;
+          case "Tab":
+          case "Bksp":
+            self.VKI_target.focus();
+          case "Enter":
+          break;
           default:
             if (type) {
               tds[y].removeChild(tds[y].firstChild);
@@ -1050,7 +1061,8 @@ angular.module('angular-virtual-keyboard', [])
 		'10': 'Decrease keyboard size',
 		'11': 'Increase keyboard size'
 	},
-	relative: true
+	relative: true,
+	sizeAdj: true
 })
 .service('ngVirtualKeyboardService', ['VKI_CONFIG', function(VKI_CONFIG) {
 	/*globals VKI */
@@ -1061,6 +1073,7 @@ angular.module('angular-virtual-keyboard', [])
 			config.kt = config.kt || VKI_CONFIG.kt;
 			config.relative = config.relative === false ? false : VKI_CONFIG.relative;
 			config.keyCenter = config.keyCenter || VKI_CONFIG.keyCenter;
+			config.sizeAdj = config.sizeAdj === false ? false : VKI_CONFIG.sizeAdj;
 
 			var vki = new VKI(config, VKI_CONFIG.layout, VKI_CONFIG.deadkey, inputCallback);
 			vki.attachVki(element);

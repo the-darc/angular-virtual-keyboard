@@ -25,7 +25,7 @@ gulp.task('build', function() {
 		' * <%= pkg.name %>',
 		' * <%= pkg.description %>',
 		' * @version v<%= pkg.version %>',
-		' * @author <%= pkg.authors[0]%>',
+		' * @author <%= pkg.author %>',
 		' * @link <%= pkg.homepage %>',
 		' * @license <%= pkg.license %>',
 		' */',
