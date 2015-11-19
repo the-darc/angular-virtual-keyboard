@@ -97,8 +97,10 @@ angular.module('angular-virtual-keyboard', [])
 				var UAParser = $injector.get('UAParser');
 				var results = new UAParser().getResult();
 				var isMobile = results.device.type === 'mobile' || results.device.type === 'tablet';
-                isMobile = isMobile || (results.os && (results.os.name === 'Android'));
-                isMobile = isMobile || (results.os && (results.os.name === 'iOS'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'Android'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'iOS'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'Windows Phone'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'Windows Mobile'));
 				if (isMobile && scope.config.showInMobile !== true) {
 					return;
 				}
