@@ -1,6 +1,6 @@
 {
   "name": "angular-virtual-keyboard",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "homepage": "https://github.com/the-darc/angular-virtual-keyboard",
   "author": "the-darc <darc.tec@gmail.com>",
   "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",

@@ -1,7 +1,7 @@
 /**
  * angular-virtual-keyboard
  * An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI
- * @version v0.4.2
+ * @version v0.4.3
  * @author the-darc <darc.tec@gmail.com>
  * @link https://github.com/the-darc/angular-virtual-keyboard
  * @license MIT
@@ -87,6 +87,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_keyCenter = config.keyCenter || 3;
   this.VKI_forcePosition = config.forcePosition || false;
   this.VKI_relative = config.relative === false ? false : true;
+  this.VKI_customClass = config.customClass || false;
 
   this.VKI_isIE = /*@cc_on!@*/false;
   this.VKI_isIE6 = /*@if(@_jscript_version == 5.6)!@end@*/false;
@@ -288,6 +289,9 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_keyboard.className = "keyboardInputMaster";
   if (this.VKI_relative) {
     self.VKI_keyboard.className += ' relativeKeyboard';
+  }
+  if (this.VKI_customClass) {
+    self.VKI_keyboard.className += ' ' + this.VKI_customClass;
   }
   this.VKI_keyboard.dir = "ltr";
   this.VKI_keyboard.cellSpacing = "0";
@@ -748,6 +752,9 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
    */
   this.VKI_insert = function(text) {
     this.VKI_target.focus();
+    if (text && text.length > 1 && text.trim) {
+      text = text.trim();
+    }
     if (this.VKI_target.maxLength) this.VKI_target.maxlength = this.VKI_target.maxLength;
     if (typeof this.VKI_target.maxlength == "undefined" ||
         this.VKI_target.maxlength < 0 ||
@@ -1062,7 +1069,8 @@ angular.module('angular-virtual-keyboard', [])
 		'11': 'Increase keyboard size'
 	},
 	relative: true,
-	sizeAdj: true
+	sizeAdj: true,
+	customClass: false
 })
 .service('ngVirtualKeyboardService', ['VKI_CONFIG', function(VKI_CONFIG) {
 	/*globals VKI */
@@ -1074,6 +1082,7 @@ angular.module('angular-virtual-keyboard', [])
 			config.relative = config.relative === false ? false : VKI_CONFIG.relative;
 			config.keyCenter = config.keyCenter || VKI_CONFIG.keyCenter;
 			config.sizeAdj = config.sizeAdj === false ? false : VKI_CONFIG.sizeAdj;
+			config.customClass = config.customClass || VKI_CONFIG.customClass;
 
 			var vki = new VKI(config, VKI_CONFIG.layout, VKI_CONFIG.deadkey, inputCallback);
 			vki.attachVki(element);
@@ -1098,8 +1107,10 @@ angular.module('angular-virtual-keyboard', [])
 				var UAParser = $injector.get('UAParser');
 				var results = new UAParser().getResult();
 				var isMobile = results.device.type === 'mobile' || results.device.type === 'tablet';
-                isMobile = isMobile || (results.os && (results.os.name === 'Android'));
-                isMobile = isMobile || (results.os && (results.os.name === 'iOS'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'Android'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'iOS'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'Windows Phone'));
+		                isMobile = isMobile || (results.os && (results.os.name === 'Windows Mobile'));
 				if (isMobile && scope.config.showInMobile !== true) {
 					return;
 				}

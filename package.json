@@ -1,6 +1,6 @@
 {
   "name": "angular-virtual-keyboard",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
   "main": "index.js",
   "scripts": {
