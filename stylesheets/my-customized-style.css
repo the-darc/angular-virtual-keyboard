@@ -1,0 +1,106 @@
+table.myCustomizedVkt {
+	border-collapse: initial;
+}
+
+/* Keyboard fonts *****************************************************************/
+table.myCustomizedVkt tbody tr td table tbody tr td {
+	font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Trebuchet MS', sans-serif;
+}
+
+/* Keyboard default size **********************************************************/
+table.myCustomizedVkt.keyboardInputSize1,
+table.myCustomizedVkt.keyboardInputSize1 * {
+	font-size:20px !important;
+}
+table.myCustomizedVkt,
+table.myCustomizedVkt * {
+	font-size:26px !important;
+}
+table.myCustomizedVkt.keyboardInputSize3,
+table.myCustomizedVkt.keyboardInputSize3 * {
+	font-size:32px !important;
+}
+table.myCustomizedVkt.keyboardInputSize4,
+table.myCustomizedVkt.keyboardInputSize4 * {
+	font-size:38px !important;
+}
+table.myCustomizedVkt.keyboardInputSize5,
+table.myCustomizedVkt.keyboardInputSize5 * {
+	font-size:44px !important;
+}
+
+/* Keyboard background ************************************************************/
+table.myCustomizedVkt thead tr th {
+	background-color: #171717;
+}
+table.myCustomizedVkt {
+    background: url(../images/bkgp.jpg);
+}
+
+/* Keyboard buttons ***************************************************************/
+table.myCustomizedVkt tbody tr td table tbody tr td {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+	background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	cursor:pointer;
+	color:#171717;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+table.myCustomizedVkt tbody tr td table tbody tr td:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+	background:-moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+	background-color:#dfdfdf;
+}
+table.myCustomizedVkt tbody tr td table tbody tr td:active {
+	position:relative;
+	top:1px;
+}
+
+/* Head buttons *******************************************************************/
+table.myCustomizedVkt thead tr th {
+	padding: 5px;
+}
+
+table.myCustomizedVkt thead tr th span,
+table.myCustomizedVkt thead tr th strong,
+table.myCustomizedVkt thead tr th small,
+table.myCustomizedVkt thead tr th big {
+	background-color: #ededed;
+}
+
+table.myCustomizedVkt thead tr th span:hover,
+table.myCustomizedVkt thead tr th strong:hover,
+table.myCustomizedVkt thead tr th small:hover,
+table.myCustomizedVkt thead tr th big:hover {
+	background-color:#dfdfdf;
+}
+
+/* Panel border radius ************************************************************/
+table.myCustomizedVkt,
+table.myCustomizedVkt thead tr th {
+    -webkit-border-top-left-radius: 0em;
+    -webkit-border-top-right-radius: 0em;
+    -moz-border-top-left-radius: 0em;
+    -moz-border-top-right-radius: 0em;
+    border-top-left-radius: 0em;
+    border-top-right-radius: 0em;
+
+    border: none;
+}
