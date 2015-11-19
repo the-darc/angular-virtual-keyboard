@@ -77,6 +77,7 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_keyCenter = config.keyCenter || 3;
   this.VKI_forcePosition = config.forcePosition || false;
   this.VKI_relative = config.relative === false ? false : true;
+  this.VKI_customClass = config.customClass || false;
 
   this.VKI_isIE = /*@cc_on!@*/false;
   this.VKI_isIE6 = /*@if(@_jscript_version == 5.6)!@end@*/false;
@@ -278,6 +279,9 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
   this.VKI_keyboard.className = "keyboardInputMaster";
   if (this.VKI_relative) {
     self.VKI_keyboard.className += ' relativeKeyboard';
+  }
+  if (this.VKI_customClass) {
+    self.VKI_keyboard.className += ' ' + this.VKI_customClass;
   }
   this.VKI_keyboard.dir = "ltr";
   this.VKI_keyboard.cellSpacing = "0";
