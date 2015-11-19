@@ -1,3 +1,18 @@
+<a name"0.4.3"></a>
+### 0.4.3 (2015-11-19)
+
+
+#### Bug Fixes
+
+* **VKI_insert:** trim button text before insert in the input field ([52956b40](https://github.com/the-darc/angular-virtual-keyboard/commit/52956b40))
+* **bower:** include css in main section of bower ([05e9899](https://github.com/the-darc/angular-virtual-keyboard/commit/05e9899))
+* **UAParser:** Windows Phone added to supported mobile platforms ([9143622](https://github.com/the-darc/angular-virtual-keyboard/commit/9143622))
+
+#### Features
+
+* **custom-class:** add support to custom-class configuration ([b2477cd5](https://github.com/the-darc/angular-virtual-keyboard/commit/b2477cd5))
+
+
 <a name"0.4.2"></a>
 ### 0.4.2 (2015-07-21)
 
