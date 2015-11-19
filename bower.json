@@ -4,7 +4,10 @@
   "homepage": "https://github.com/the-darc/angular-virtual-keyboard",
   "author": "the-darc <darc.tec@gmail.com>",
   "description": "An AngularJs Virtual Keyboard Interface based on GreyWyvern VKI",
-  "main": "release/angular-virtual-keyboard.min.js",
+  "main": [
+    "release/angular-virtual-keyboard.min.js",
+    "release/angular-virtual-keyboard.css"
+  ],
   "keywords": [
     "Keyboard",
     "Virtual",
