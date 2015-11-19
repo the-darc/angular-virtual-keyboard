@@ -742,6 +742,9 @@ var VKI = function(customConfig, layout, deadKeys, keyInputCallback) {
    */
   this.VKI_insert = function(text) {
     this.VKI_target.focus();
+    if (text && text.length > 1 && text.trim) {
+      text = text.trim();
+    }
     if (this.VKI_target.maxLength) this.VKI_target.maxlength = this.VKI_target.maxLength;
     if (typeof this.VKI_target.maxlength == "undefined" ||
         this.VKI_target.maxlength < 0 ||
